@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-OMEGA: QUANTUM CHAOS</title>
+    <title>V-OMEGA: QUANTUM CHAOS 2.0</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
 
@@ -19,7 +19,7 @@
             min-height: 100vh;
             padding: 20px;
             overflow: hidden;
-            background: radial-gradient(circle at center, #0a192f 0%, #000000 100%);
+            background: radial-gradient(circle at center, #0a1424 0%, #000000 100%);
         }
 
         /* Lưới không gian 3D giả lập */
@@ -27,17 +27,17 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 10s linear infinite;
+                linear-gradient(rgba(0, 255, 204, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(600px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridMove 15s linear infinite;
             z-index: 0;
         }
 
         @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(30px) translateZ(-200px); }
+            0% { transform: perspective(600px) rotateX(60deg) translateY(0) translateZ(-200px); }
+            100% { transform: perspective(600px) rotateX(60deg) translateY(40px) translateZ(-200px); }
         }
 
         .container {
@@ -45,39 +45,39 @@
             z-index: 10;
             background: rgba(4, 13, 33, 0.85);
             padding: 35px;
-            border-radius: 4px;
-            box-shadow: 0 0 50px rgba(0, 255, 204, 0.1), inset 0 0 20px rgba(0, 255, 204, 0.05);
+            border-radius: 6px;
+            box-shadow: 0 0 50px rgba(0, 255, 204, 0.15), inset 0 0 20px rgba(0, 255, 204, 0.05);
             width: 100%;
-            max-width: 650px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            backdrop-filter: blur(10px);
+            max-width: 700px;
+            border: 1px solid rgba(0, 255, 204, 0.4);
+            backdrop-filter: blur(12px);
         }
 
         h1 {
             color: #fff;
-            font-size: 28px;
+            font-size: 32px;
             text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-            text-shadow: 0 0 15px #00ffcc;
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
         }
 
         .subtitle {
             text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             color: #f50057;
             margin-bottom: 30px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            animation: pulse 2s infinite;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
         input {
             width: 100%;
             padding: 18px;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             border: 1px solid #00ffcc;
             color: #fff;
             font-size: 18px;
@@ -86,10 +86,11 @@
             outline: none;
             text-transform: uppercase;
             letter-spacing: 3px;
+            transition: 0.3s;
         }
         
         input:focus {
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
             border-color: #fff;
         }
 
@@ -111,30 +112,32 @@
 
         button:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+            box-shadow: 0 0 35px rgba(0, 255, 204, 0.7);
         }
 
         /* Màn hình phân tích cực gắt */
         .analyzer-screen {
             display: none;
             margin-top: 25px;
-            background: #000;
+            background: #02060f;
             border: 1px solid #333;
             padding: 15px;
-            height: 220px;
+            height: 250px;
             overflow-y: hidden;
             position: relative;
+            box-shadow: inset 0 0 15px rgba(0,0,0,1);
         }
 
         .code-lines {
-            font-size: 11px;
+            font-size: 12px;
             color: #00ffcc;
-            line-height: 1.4;
-            opacity: 0.8;
+            line-height: 1.5;
+            opacity: 0.9;
         }
 
         .math-equation { color: #ffeb3b; }
-        .danger-txt { color: #f50057; }
+        .danger-txt { color: #f50057; font-weight: bold;}
+        .highlight-txt { color: #00b3ff; }
 
         /* Kết quả hiển thị Glitch */
         .final-box {
@@ -142,52 +145,47 @@
             margin-top: 25px;
             text-align: center;
             padding: 30px 10px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.8);
             border-top: 2px solid #00ffcc;
             border-bottom: 2px solid #00ffcc;
             position: relative;
         }
 
         .result-main {
-            font-size: 70px;
+            font-size: 75px;
             font-weight: bold;
-            letter-spacing: 10px;
-            margin-bottom: 10px;
+            letter-spacing: 12px;
+            margin-bottom: 5px;
         }
 
         .result-sub {
-            font-size: 28px;
-            letter-spacing: 5px;
+            font-size: 30px;
+            letter-spacing: 6px;
         }
 
-        .glitch-tai { color: #00ffcc; text-shadow: 2px 2px 0px #f50057, -2px -2px 0px #00b3ff; }
-        .glitch-xiu { color: #f50057; text-shadow: 2px 2px 0px #00ffcc, -2px -2px 0px #ffeb3b; }
+        .glitch-tai { color: #00ffcc; text-shadow: 3px 3px 0px #f50057, -3px -3px 0px #00b3ff; }
+        .glitch-xiu { color: #f50057; text-shadow: 3px 3px 0px #00ffcc, -3px -3px 0px #ffeb3b; }
         
         .glitch-chan { color: #ffeb3b; }
         .glitch-le { color: #b388ff; }
 
-        /* Hiệu ứng rung nhẹ liên tục */
-        .shake { animation: shake 0.5s infinite; }
+        .shake { animation: shake 0.4s infinite; }
         @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            0% { transform: translate(2px, 1px) rotate(0deg); }
             20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+            40% { transform: translate(1px, -2px) rotate(1deg); }
+            60% { transform: translate(-3px, 2px) rotate(0deg); }
+            80% { transform: translate(-1px, -2px) rotate(2deg); }
+            100% { transform: translate(2px, -1px) rotate(-1deg); }
         }
 
         .stats {
             display: flex;
             justify-content: space-between;
-            font-size: 10px;
-            color: #888;
-            margin-top: 15px;
+            font-size: 11px;
+            color: #666;
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -195,10 +193,10 @@
     <div class="grid-bg"></div>
 
     <div class="container">
-        <h1>V-OMEGA CORE</h1>
-        <div class="subtitle">WARNING: LOGISTIC MAP & CHAOS THEORY ACTIVE</div>
+        <h1>V-OMEGA CORE 2.0</h1>
+        <div class="subtitle">WARNING: HÉNON STRANGE ATTRACTOR ACTIVE</div>
         
-        <input type="text" id="md5Input" placeholder="INPUT HASH SEQUENCE" maxlength="32">
+        <input type="text" id="md5Input" placeholder="INPUT 32-BIT MD5 HASH" maxlength="32">
         <button onclick="executeOmega()" id="btnExecute">EXECUTE QUANTUM MATH</button>
 
         <div class="analyzer-screen" id="analyzerScreen">
@@ -210,14 +208,13 @@
             <div id="resChanLe" class="result-sub"></div>
             
             <div class="stats">
-                <span id="entropyStat">ENTROPY: 0.0000</span>
-                <span id="chaosStat">LORENZ: (0, 0, 0)</span>
+                <span id="entropyStat">MAGNITUDE: 0.0000</span>
+                <span id="chaosStat">PARITY: 0x00</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Web Crypto API để băm SHA-256 từ MD5 (Tăng cường độ phức tạp)
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -225,11 +222,12 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        function pushLog(text, isMath = false, isDanger = false) {
+        function pushLog(text, type = "normal") {
             const cons = document.getElementById('codeConsole');
             let className = "";
-            if(isMath) className = "math-equation";
-            if(isDanger) className = "danger-txt";
+            if (type === "math") className = "math-equation";
+            if (type === "danger") className = "danger-txt";
+            if (type === "highlight") className = "highlight-txt";
             
             cons.innerHTML += `<div class="${className}">[${(new Date()).toISOString().substring(11,23)}] ${text}</div>`;
             cons.scrollTop = cons.scrollHeight;
@@ -240,11 +238,11 @@
         async function executeOmega() {
             const inputVal = document.getElementById('md5Input').value.trim().toLowerCase();
             if (!/^[a-f0-9]{32}$/.test(inputVal)) {
-                alert("CRITICAL ERROR: Dữ liệu không phải mã MD5 32-bit.");
+                alert("CRITICAL ERROR: Dữ liệu không hợp lệ. Vui lòng nhập đúng 32 ký tự MD5.");
                 return;
             }
 
-            // Giao diện
+            // Reset UI
             document.getElementById('btnExecute').style.display = 'none';
             document.getElementById('resultBox').style.display = 'none';
             document.getElementById('analyzerScreen').style.display = 'block';
@@ -252,62 +250,86 @@
             cons.innerHTML = "";
 
             // BƯỚC 1: BĂM KÉP SHA-256
-            pushLog("INITIATING QUANTUM HASHING...");
+            pushLog("INITIATING QUANTUM HASHING...", "highlight");
             await sleep(300);
             const shaHash = await sha256(inputVal);
-            pushLog(`SHA-256 COLLISION: ${shaHash.substring(0, 32)}...`);
+            pushLog(`SHA-256 GENERATED: ${shaHash.substring(0, 24)}...`);
+            await sleep(300);
             
-            // BƯỚC 2: TÍNH TOÁN LÝ THUYẾT HỖN LOẠN (LOGISTIC MAP)
+            // BƯỚC 2: XOR-FOLDING (Chia khối và gập dữ liệu)
+            pushLog("PERFORMING BITWISE XOR-FOLDING MATRIX...", "math");
+            let chunks = [];
+            for (let i = 0; i < 8; i++) {
+                chunks.push(parseInt(shaHash.substring(i * 8, i * 8 + 8), 16));
+            }
+            
+            // Tạo Hạt giống Lõi (Core Seeds) từ việc XOR các khối đối xứng
+            let alpha = chunks[0] ^ chunks[4];
+            let beta = chunks[1] ^ chunks[5];
+            let gamma = chunks[2] ^ chunks[6];
+            let delta = chunks[3] ^ chunks[7];
+            
+            pushLog(`CORE SEEDS: α=${alpha.toString(16)} | β=${beta.toString(16)}`);
             await sleep(400);
-            pushLog("INJECTING CHAOS THEORY (LOGISTIC MAP)...", false, true);
+
+            // BƯỚC 3: HỆ HÉNON (HÉNON MAP STRANGE ATTRACTOR - 2D CHAOS)
+            pushLog("INJECTING HÉNON STRANGE ATTRACTOR...", "danger");
             
-            // Lấy 8 ký tự đầu để tạo hạt giống r (Tốc độ sinh sản trong hỗn loạn)
-            let seedHex = shaHash.substring(0, 8);
-            let seedInt = parseInt(seedHex, 16);
+            // Tham số hỗn loạn chuẩn (a ≈ 1.4, b ≈ 0.3) cộng thêm nhiễu từ Hash
+            let a = 1.4 + ((alpha % 10000) / 100000); 
+            let b = 0.3 + ((beta % 10000) / 100000); 
             
-            // X_n+1 = r * X_n * (1 - X_n)
-            let r = 3.6 + ((seedInt % 4000) / 10000); // Đảm bảo r nằm trong vùng hỗn loạn (3.6 -> 3.99)
-            let x = 0.5; // Điểm bắt đầu
+            // Điểm khởi tạo x, y
+            let x = (gamma % 10000) / 10000; 
+            let y = (delta % 10000) / 10000; 
+
+            pushLog(`ƒ(Xn+1) = 1 - ${a.toFixed(4)}Xn² + Yn`, "math");
+            pushLog(`ƒ(Yn+1) = ${b.toFixed(4)}Xn`, "math");
+            await sleep(400);
             
-            pushLog(`ƒ(x) = ${r.toFixed(4)}x(1 - x)`, true);
-            
+            // Chạy vòng lặp hỗn loạn 100 lần
             for(let i=1; i<=100; i++) {
-                x = r * x * (1 - x);
-                if (i % 25 === 0) pushLog(`Iteration ${i} -> x = ${x.toFixed(8)}`);
-                await sleep(50);
+                let next_x = 1 - a * x * x + y;
+                let next_y = b * x;
+                x = next_x;
+                y = next_y;
+                
+                if (i % 25 === 0) {
+                    pushLog(`Vector ${i}: [ ${x.toFixed(6)}, ${y.toFixed(6)} ]`);
+                    await sleep(100);
+                }
             }
 
-            // BƯỚC 3: HỆ TỌA ĐỘ LORENZ (LORENZ ATTRACTOR)
-            pushLog("CALCULATING LORENZ ATTRACTOR COORDINATES...");
+            // BƯỚC 4: RÚT TRÍCH ENTROPY VÀ SỤP ĐỔ HÀM SÓNG (WAVE FUNCTION COLLAPSE)
+            pushLog("ANALYZING WAVE AMPLITUDE & PARITY...", "highlight");
             await sleep(400);
+
+            // Logic Tài/Xỉu: Dựa vào Biên độ (Magnitude) tuyệt đối của X
+            // Sau 100 vòng lặp, lấy phần thập phân của |X| để đánh giá năng lượng
+            let magnitude = Math.abs(x);
+            let fractionalEnergy = magnitude - Math.floor(magnitude); 
+            pushLog(`MAGNITUDE = ${fractionalEnergy.toFixed(6)} (Threshold: 0.500000)`, "math");
+
+            // Logic Chẵn/Lẻ: Dựa vào Tính chẵn lẻ (Parity) của giá trị tọa độ không gian gộp
+            // Nhân Y với một hằng số lớn, lấy phần nguyên và kiểm tra bit cuối (Chẵn hay Lẻ)
+            let spatialEntropy = Math.floor(Math.abs(y * 10000000));
+            pushLog(`SPATIAL ENTROPY = ${spatialEntropy} => PARITY CHECK`, "math");
             
-            let y_val = (parseInt(shaHash.substring(8, 16), 16) / 4294967295) * 100;
-            let z_val = (parseInt(shaHash.substring(16, 24), 16) / 4294967295) * 100;
-            
-            pushLog(`[dx/dt = σ(y - x)] | [dy/dt = x(ρ - z) - y] | [dz/dt = xy - βz]`, true);
+            await sleep(500);
+            pushLog("COLLAPSING SUPERPOSITION...", "danger");
             await sleep(500);
 
-            // BƯỚC 4: KẾT XUẤT CUỐI CÙNG (COLLAPSE SUPERPOSITION)
-            pushLog("COLLAPSING WAVE FUNCTION...", false, true);
-            await sleep(600);
-
-            // Xử lý X để ra Tài/Xỉu
-            // Nhân x (từ 0 đến 1) với 1.000.000, lấy phần nguyên, xét chẵn lẻ
-            let quantumCollapse = Math.floor(x * 1000000);
-            
-            // Xử lý Y, Z để ra Chẵn/Lẻ
-            let spatialCollapse = Math.floor(y_val * z_val * 100);
-
+            // HIỂN THỊ KẾT QUẢ
             document.getElementById('analyzerScreen').style.display = 'none';
             document.getElementById('resultBox').style.display = 'block';
             
-            // Rung màn hình
+            // Hiệu ứng rung gắt
             document.getElementById('resultBox').classList.add('shake');
-            setTimeout(() => document.getElementById('resultBox').classList.remove('shake'), 800);
+            setTimeout(() => document.getElementById('resultBox').classList.remove('shake'), 600);
 
-            // Kết quả Tài Xỉu
+            // Định đoạt Tài / Xỉu
             const txNode = document.getElementById('resTaiXiu');
-            if (quantumCollapse % 2 === 0) {
+            if (fractionalEnergy > 0.5) {
                 txNode.textContent = "TÀI";
                 txNode.className = "result-main glitch-tai";
             } else {
@@ -315,9 +337,9 @@
                 txNode.className = "result-main glitch-xiu";
             }
 
-            // Kết quả Chẵn Lẻ
+            // Định đoạt Chẵn / Lẻ
             const clNode = document.getElementById('resChanLe');
-            if (spatialCollapse % 2 === 0) {
+            if (spatialEntropy % 2 === 0) {
                 clNode.textContent = "{ CHẴN }";
                 clNode.className = "result-sub glitch-chan";
             } else {
@@ -325,12 +347,13 @@
                 clNode.className = "result-sub glitch-le";
             }
 
-            // In thông số chuyên sâu
-            document.getElementById('entropyStat').textContent = `ENTROPY: ${x.toFixed(6)}`;
-            document.getElementById('chaosStat').textContent = `LORENZ: (${quantumCollapse.toString().substring(0,3)}, ${y_val.toFixed(1)}, ${z_val.toFixed(1)})`;
+            // Cập nhật thông số kỹ thuật (Decor)
+            document.getElementById('entropyStat').textContent = `MAGNITUDE: ${fractionalEnergy.toFixed(5)}`;
+            document.getElementById('chaosStat').textContent = `PARITY: 0x${spatialEntropy.toString(16).toUpperCase()}`;
 
+            // Reset Nút
             document.getElementById('btnExecute').style.display = 'block';
-            document.getElementById('btnExecute').textContent = "CALCULATE NEXT HASH";
+            document.getElementById('btnExecute').textContent = "DECODE NEW HASH";
         }
     </script>
 </body>
