@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-NEXUS: CYBER PROTOCOL</title>
+    <title>V-NEXUS: NEURAL LEARNING</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800;900&family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
 
         :root {
             --neon-cyan: #00f3ff;
             --neon-pink: #ff00ea;
             --neon-yellow: #ffe600;
-            --dark-bg: #05020a;
-            --panel-bg: rgba(10, 5, 20, 0.75);
+            --neon-green: #00ff66;
+            --dark-bg: #030108;
+            --panel-bg: rgba(10, 15, 25, 0.85);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,408 +28,227 @@
             min-height: 100vh;
             padding: 20px;
             overflow: hidden;
-            background: radial-gradient(circle at center, #10061e 0%, #000000 100%);
+            background: radial-gradient(circle at center, #0a0614 0%, #000000 100%);
         }
 
-        /* Lưới Cyberpunk */
         .cyber-grid {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 243, 255, 0.08) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.08) 2px, transparent 2px);
-            background-size: 60px 60px;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
             transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridScan 10s linear infinite;
-            z-index: 0;
+            animation: gridScan 15s linear infinite; z-index: 0;
         }
 
-        @keyframes gridScan {
-            0% { transform: perspective(1000px) rotateX(60deg) translateY(0) translateZ(-200px); }
-            100% { transform: perspective(1000px) rotateX(60deg) translateY(60px) translateZ(-200px); }
-        }
+        @keyframes gridScan { 0% { transform: perspective(1000px) rotateX(60deg) translateY(0) translateZ(-200px); } 100% { transform: perspective(1000px) rotateX(60deg) translateY(50px) translateZ(-200px); } }
 
         .container {
-            position: relative;
-            z-index: 10;
-            background: var(--panel-bg);
-            padding: 40px;
-            width: 100%;
-            max-width: 800px;
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            backdrop-filter: blur(10px);
-            /* Vát góc chuẩn Cyberpunk */
-            clip-path: polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
-            box-shadow: inset 0 0 40px rgba(0, 243, 255, 0.1);
+            position: relative; z-index: 10; background: var(--panel-bg); padding: 40px; width: 100%; max-width: 700px;
+            border: 1px solid rgba(0, 243, 255, 0.2); backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.05), inset 0 0 20px rgba(0, 243, 255, 0.05);
         }
 
-        /* Viền trang trí HUD */
-        .container::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 30px; height: 3px; background: var(--neon-cyan);
-        }
-        .container::after {
-            content: ''; position: absolute; bottom: 0; right: 0; width: 30px; height: 3px; background: var(--neon-pink);
-        }
+        .hud-corner { position: absolute; width: 20px; height: 20px; border: 2px solid var(--neon-cyan); }
+        .top-left { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .top-right { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+        .bottom-left { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+        .bottom-right { bottom: -2px; right: -2px; border-left: none; border-top: none; }
 
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: #fff;
-            font-size: 40px;
-            text-align: center;
-            margin-bottom: 5px;
-            letter-spacing: 4px;
-            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-            font-weight: 900;
-        }
+        h1 { font-family: 'Orbitron', sans-serif; color: #fff; font-size: 34px; text-align: center; margin-bottom: 5px; letter-spacing: 5px; text-shadow: 0 0 15px var(--neon-cyan); font-weight: 900; }
+        .subtitle { text-align: center; font-size: 12px; color: var(--neon-yellow); margin-bottom: 35px; letter-spacing: 4px; font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
 
-        .subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: var(--neon-yellow);
-            margin-bottom: 40px;
-            letter-spacing: 6px;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        input {
-            width: 100%;
-            padding: 20px 20px 20px 50px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-pink);
-            font-size: 20px;
-            font-family: 'Share Tech Mono', monospace;
-            outline: none;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            transition: 0.3s;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--neon-cyan);
-            font-weight: bold;
-            font-size: 20px;
-        }
+        .input-wrapper { display: flex; align-items: center; background: rgba(0, 0, 0, 0.7); border: 1px solid var(--neon-cyan); padding: 0 20px; margin-bottom: 25px; transition: all 0.3s; box-shadow: inset 0 0 15px rgba(0, 243, 255, 0.1); }
+        .input-wrapper:focus-within { box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), inset 0 0 10px rgba(0, 243, 255, 0.1); border-color: var(--neon-cyan); }
+        .input-icon { color: var(--neon-cyan); font-weight: bold; font-size: 20px; margin-right: 15px; }
         
-        input:focus {
-            box-shadow: 0 0 25px rgba(255, 0, 234, 0.4);
-            border-color: var(--neon-pink);
-            color: #fff;
-        }
+        input { flex: 1; background: transparent; border: none; padding: 20px 0; color: #fff; font-size: 18px; font-family: 'Share Tech Mono', monospace; outline: none; text-transform: uppercase; letter-spacing: 2px; }
 
-        button {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(90deg, #001133, #004466);
-            color: var(--neon-cyan);
-            border: 1px solid var(--neon-cyan);
-            font-size: 22px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-        }
+        button { width: 100%; padding: 18px; background: rgba(0, 243, 255, 0.1); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); font-size: 18px; font-family: 'Orbitron', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 3px; }
+        button:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 25px var(--neon-cyan); transform: translateY(-2px); }
 
-        button:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 30px var(--neon-cyan);
-        }
-
-        /* Terminal Console (Thiết kế phong cách CRT) */
-        .analyzer-screen {
-            display: none;
-            margin-top: 30px;
-            background: #020104;
-            border: 1px solid #1a0f2e;
-            padding: 20px;
-            height: 280px;
-            overflow-y: hidden;
-            position: relative;
-            box-shadow: inset 0 0 30px rgba(0,0,0,1);
-        }
-
-        .crt-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .code-lines {
-            font-size: 14px;
-            color: #00ffcc;
-            line-height: 1.5;
-            z-index: 1;
-            position: relative;
-        }
-
-        .log-math { color: var(--neon-yellow); }
+        .analyzer-screen { display: none; margin-top: 30px; background: #020104; border: 1px solid #1a0f2e; padding: 20px; height: 200px; overflow-y: hidden; position: relative; box-shadow: inset 0 0 30px rgba(0,0,0,1); }
+        .code-lines { font-size: 13px; color: var(--neon-cyan); line-height: 1.5; z-index: 1; position: relative; }
+        .log-warn { color: var(--neon-yellow); font-weight: bold; }
         .log-sys { color: var(--neon-cyan); }
-        .log-err { color: var(--neon-pink); font-weight: bold; text-shadow: 0 0 5px var(--neon-pink);}
-        .log-qnt { color: #fff; font-style: italic; }
+        .log-err { color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink);}
+        .log-succ { color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green);}
 
-        /* Kết quả kép hiển thị dạng Bảng điều khiển */
-        .result-container {
-            display: none;
-            margin-top: 30px;
-            gap: 20px;
-        }
-
-        .result-box {
-            flex: 1;
-            text-align: center;
-            padding: 30px 10px;
-            background: rgba(0,0,0,0.8);
-            border: 1px solid #333;
-            position: relative;
-            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
-        }
-
-        .result-box::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-        }
+        .result-container { display: none; margin-top: 30px; text-align: center; padding: 30px 10px; background: rgba(0,0,0,0.6); border: 1px solid #222; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); border-top: 3px solid var(--neon-cyan); }
+        .result-title { font-family: 'Share Tech Mono', monospace; font-size: 14px; color: #888; margin-bottom: 15px; letter-spacing: 2px; }
+        .result-value { font-family: 'Orbitron', sans-serif; font-size: 55px; font-weight: 900; letter-spacing: 6px; transition: color 0.3s; }
         
-        .box-tai-xiu::before { background: var(--neon-cyan); }
-        .box-chan-le::before { background: var(--neon-pink); }
+        .val-tai { color: var(--neon-cyan); text-shadow: 0 0 15px var(--neon-cyan); }
+        .val-xiu { color: var(--neon-pink); text-shadow: 0 0 15px var(--neon-pink); }
 
-        .result-title {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .result-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 55px;
-            font-weight: 900;
-            letter-spacing: 6px;
-        }
-
-        .val-tai { color: var(--neon-cyan); text-shadow: 0 0 20px var(--neon-cyan); }
-        .val-xiu { color: var(--neon-pink); text-shadow: 0 0 20px var(--neon-pink); }
-        .val-chan { color: var(--neon-yellow); text-shadow: 0 0 20px var(--neon-yellow); }
-        .val-le { color: #fff; text-shadow: 0 0 20px #fff; }
-
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            font-size: 13px;
-            color: #aaa;
-            margin-top: 30px;
-            font-family: 'Share Tech Mono', monospace;
-            padding: 20px;
-            background: rgba(0,0,0,0.5);
-            border: 1px dashed #333;
-        }
-        .stats span { color: var(--neon-cyan); float: right; }
+        /* Vùng nút Training Feedback */
+        .feedback-section { display: none; margin-top: 25px; padding-top: 25px; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .feedback-title { font-size: 13px; color: #aaa; margin-bottom: 15px; text-align: center; letter-spacing: 1px; }
+        .btn-group { display: flex; gap: 15px; }
         
-        @media (min-width: 600px) {
-            .result-container { display: flex; }
-        }
+        .btn-correct { background: rgba(0, 255, 102, 0.1); color: var(--neon-green); border-color: var(--neon-green); }
+        .btn-correct:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green); }
+        
+        .btn-incorrect { background: rgba(255, 0, 234, 0.1); color: var(--neon-pink); border-color: var(--neon-pink); }
+        .btn-incorrect:hover { background: var(--neon-pink); color: #000; box-shadow: 0 0 20px var(--neon-pink); }
+
+        .stats { display: flex; justify-content: space-between; font-size: 12px; color: #777; margin-top: 20px; font-family: 'Share Tech Mono', monospace; }
+        .stats span { color: #fff; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="cyber-grid"></div>
 
     <div class="container">
-        <h1>V-NEXUS</h1>
-        <div class="subtitle">CYBER-MD5 DECODER PROTOCOL</div>
+        <div class="hud-corner top-left"></div><div class="hud-corner top-right"></div>
+        <div class="hud-corner bottom-left"></div><div class="hud-corner bottom-right"></div>
+
+        <h1>V-NEXUS CORE</h1>
+        <div class="subtitle">NEURAL MACHINE LEARNING - SELF TRAINING</div>
         
-        <div class="input-group">
+        <div class="input-wrapper">
             <span class="input-icon">_></span>
-            <input type="text" id="md5Input" placeholder="ENTER 32-BIT MD5 HASH" maxlength="32">
+            <input type="text" id="md5Input" placeholder="NHẬP MÃ MD5 CẦN PHÂN TÍCH" maxlength="32">
         </div>
         
-        <button onclick="executeQuantum()" id="btnExecute">INITIALIZE DECRYPTION</button>
+        <button onclick="executeLogic()" id="btnExecute">CHẠY THUẬT TOÁN</button>
 
         <div class="analyzer-screen" id="analyzerScreen">
-            <div class="crt-overlay"></div>
             <div id="codeConsole" class="code-lines"></div>
         </div>
 
-        <div id="finalOutput" style="display: none;">
-            <div class="result-container">
-                <div class="result-box box-tai-xiu">
-                    <div class="result-title">AMPLITUDE DETECTOR</div>
-                    <div id="resTaiXiu" class="result-value"></div>
-                </div>
-                <div class="result-box box-chan-le">
-                    <div class="result-title">PARITY SIGNATURE</div>
-                    <div id="resChanLe" class="result-value"></div>
-                </div>
-            </div>
+        <div id="finalOutput" class="result-container">
+            <div class="result-title">DỰ ĐOÁN AI (PREDICTION)</div>
+            <div id="resTaiXiu" class="result-value"></div>
             
             <div class="stats">
-                <div>PHASE ANGLE (θ): <span id="statTheta">0.000 rad</span></div>
-                <div>EIGENVALUE (λ): <span id="statLambda">0.000</span></div>
-                <div>TENSOR DET |ρ|: <span id="statDet">0.000</span></div>
-                <div>PROCESS TIME: <span id="statTime">0.00 ms</span></div>
+                <div>NGUỒN (SOURCE): <span id="statMatch">TÍNH TOÁN MỚI</span></div>
+                <div>HEX-WEIGHT: <span id="statWeight">0</span></div>
+            </div>
+
+            <!-- Khu vực Dạy AI -->
+            <div class="feedback-section" id="feedbackSection">
+                <div class="feedback-title">XÁC NHẬN KẾT QUẢ ĐỂ TRAIN AI</div>
+                <div class="btn-group">
+                    <button onclick="sendFeedback(true)" class="btn-correct">✓ ĐÚNG</button>
+                    <button onclick="sendFeedback(false)" class="btn-incorrect">✗ SAI (ĐẢO NGƯỢC)</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // LỚP TOÁN HỌC SỐ PHỨC (CỐT LÕI TỪ BẢN TRƯỚC - BẢO TOÀN TỶ LỆ 50/50)
-        class Complex {
-            constructor(r, i) { this.r = r; this.i = i; }
-            add(c) { return new Complex(this.r + c.r, this.i + c.i); }
-            mul(c) { return new Complex(this.r * c.r - this.i * c.i, this.r * c.i + this.i * c.r); }
-            sin() {
-                return new Complex(
-                    Math.sin(this.r) * Math.cosh(this.i),
-                    Math.cos(this.r) * Math.sinh(this.i)
-                );
-            }
-            mag() { return Math.sqrt(this.r * this.r + this.i * this.i); }
-            angle() { return Math.atan2(this.i, this.r); } 
-        }
-
-        async function sha512(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-512', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
+        // Khởi tạo/Lấy dữ liệu LocalStorage (Bộ nhớ AI)
+        let aiMemory = JSON.parse(localStorage.getItem('vnexus_ai_dataset')) || {};
+        
+        let currentMd5 = "";
+        let currentPrediction = "";
 
         function pushLog(text, type = "sys") {
             const cons = document.getElementById('codeConsole');
-            let className = `log-${type}`;
-            cons.innerHTML += `<div class="${className}">[${(new Date()).toISOString().substring(11,23)}] ${text}</div>`;
+            cons.innerHTML += `<div class="log-${type}">[${(new Date()).toISOString().substring(11,19)}] ${text}</div>`;
             cons.scrollTop = cons.scrollHeight;
         }
 
         const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-        async function executeQuantum() {
+        async function executeLogic() {
             const inputVal = document.getElementById('md5Input').value.trim().toLowerCase();
-            if (!/^[a-f0-9]{32}$/.test(inputVal)) {
-                alert("SYTEM REJECTED: HASH MD5 PHẢI CÓ ĐÚNG 32 KÝ TỰ HEX.");
+            if (inputVal.length !== 32) {
+                alert("LỖI: Mã MD5 phải đủ 32 ký tự.");
                 return;
             }
 
-            const startTime = performance.now();
+            currentMd5 = inputVal;
 
-            // Cập nhật UI
             document.getElementById('btnExecute').style.display = 'none';
             document.getElementById('finalOutput').style.display = 'none';
+            document.getElementById('feedbackSection').style.display = 'none';
             document.getElementById('analyzerScreen').style.display = 'block';
             document.getElementById('codeConsole').innerHTML = "";
 
-            pushLog("UPLINK ESTABLISHED. BYPASSING FIREWALL...", "sys");
-            await sleep(300);
-
-            // BƯỚC 1: HÀM TRỄ VDF
-            pushLog("ENGAGING SHA-512 NEURAL EXPANSION...", "sys");
-            let hash = inputVal;
-            for(let i = 0; i < 5; i++) {
-                hash = await sha512(hash);
-                if(i===0) pushLog(`CYBER-HASH GENERATED: ${hash.substring(0, 32)}...`, "sys");
-            }
-            await sleep(300);
-
-            // BƯỚC 2: MA TRẬN
-            pushLog("CONSTRUCTING 4x4 TENSOR MATRIX...", "qnt");
-            let m = [];
-            for(let i=0; i<16; i++) {
-                m.push(parseInt(hash.substring(i*4, i*4+4), 16) / 65535);
-            }
-            let tensorDet = (m[0]*m[5]*m[10]*m[15]) - (m[3]*m[6]*m[9]*m[12]);
-            pushLog(`MATRIX DETERMINANT: ${tensorDet.toFixed(8)}`, "math");
+            pushLog("KẾT NỐI VÀO BỘ NHỚ LÕI NEURAL...", "sys");
             await sleep(400);
 
-            // BƯỚC 3: SÓNG PHỨC & RENORMALIZATION
-            pushLog("INJECTING FRACTAL SINE ALGORITHM...", "err");
-            let realSeed = parseInt(hash.substring(64, 80), 16) / 1e19;
-            let imagSeed = parseInt(hash.substring(80, 96), 16) / 1e19;
-            let c_real = -2.0 + (realSeed * 4.0);
-            let c_imag = -2.0 + (imagSeed * 4.0);
-            let C = new Complex(c_real, c_imag);
-            let Z = new Complex(0, 0);
+            let isMatched = false;
+            let hexWeightSum = 0;
 
-            pushLog(`ƒ(Z) = sin(Z²) + (${c_real.toFixed(3)} + ${c_imag.toFixed(3)}i)`, "math");
-            await sleep(400);
-
-            for(let i = 1; i <= 100; i++) {
-                let Z_squared = Z.mul(Z); 
-                let Z_sin = Z_squared.sin(); 
-                Z = Z_sin.add(C); 
+            // KIỂM TRA BỘ NHỚ
+            if (aiMemory[currentMd5]) {
+                pushLog(`[!] TÌM THẤY DỮ LIỆU ĐÃ HỌC TỪ VÁN TRƯỚC!`, "succ");
+                await sleep(500);
+                pushLog(`-> Đang truy xuất kết quả chính xác từ Local Storage...`, "sys");
                 
-                // BẢO TOÀN NĂNG LƯỢNG (Fix lỗi NaN)
-                let mag = Z.mag();
-                if (mag > 100) { 
-                    Z.r = (Z.r / mag) * Math.PI;
-                    Z.i = (Z.i / mag) * Math.PI;
-                }
+                currentPrediction = aiMemory[currentMd5];
+                isMatched = true;
+                hexWeightSum = "LƯU TRỮ TRONG BỘ NHỚ";
+            } else {
+                pushLog("Mã mới tinh. Bắt đầu tính toán Hex-Weight...", "sys");
+                await sleep(400);
                 
-                if (i % 25 === 0) {
-                    pushLog(`Processing Block ${i}% : Vector[${Z.r.toFixed(4)}, ${Z.i.toFixed(4)}]`, "qnt");
-                    await sleep(60);
+                for(let i = 0; i < currentMd5.length; i++) {
+                    let val = parseInt(currentMd5[i], 16);
+                    hexWeightSum += val;
                 }
+
+                pushLog(`Tổng Hex-Weight: ${hexWeightSum}`, "warn");
+                await sleep(400);
+                
+                // Thuật toán mặc định (Bạn có thể đổi lẻ/chẵn tùy ý)
+                if (hexWeightSum % 2 !== 0) {
+                    currentPrediction = "TÀI";
+                } else {
+                    currentPrediction = "XỈU";
+                }
+                pushLog(`Thuật toán thô kết luận: ${currentPrediction}`, "sys");
             }
 
-            // BƯỚC 4: KẾT XUẤT DỮ LIỆU
-            pushLog("ANALYZING PHASE STATE...", "sys");
-            await sleep(400);
-            pushLog("DECRYPTION COMPLETE.", "err");
-            await sleep(500);
-
-            let theta = Z.angle(); 
-            let lambda = Z.mag();
-            let parityCheck = Math.floor(lambda * 1000000); 
-
-            // HIỂN THỊ UI
+            await sleep(600);
+            
+            // Render kết quả
             document.getElementById('analyzerScreen').style.display = 'none';
             document.getElementById('finalOutput').style.display = 'block';
             
-            // Xóa style cũ cho class để chạy lại animation hoặc CSS chuẩn
-            const txNode = document.getElementById('resTaiXiu');
-            const clNode = document.getElementById('resChanLe');
+            updateResultUI(currentPrediction);
             
-            if (theta > 0) {
-                txNode.textContent = "TÀI";
-                txNode.className = "result-value val-tai";
+            document.getElementById('statMatch').textContent = isMatched ? "MEMORY (ĐÃ HỌC)" : "CALCULATION (MỚI)";
+            document.getElementById('statWeight').textContent = hexWeightSum;
+
+            // Hiện nút feedback để Train AI
+            document.getElementById('feedbackSection').style.display = 'block';
+        }
+
+        function updateResultUI(result) {
+            const txNode = document.getElementById('resTaiXiu');
+            txNode.textContent = result;
+            txNode.className = result === "TÀI" ? "result-value val-tai" : "result-value val-xiu";
+        }
+
+        // CƠ CHẾ TRAIN AI VÀ GHI LOG (LOCAL STORAGE)
+        function sendFeedback(isCorrect) {
+            let finalLearnedResult = currentPrediction;
+
+            if (!isCorrect) {
+                // Đảo ngược kết quả nếu đoán sai
+                finalLearnedResult = currentPrediction === "TÀI" ? "XỈU" : "TÀI";
+                updateResultUI(finalLearnedResult);
+                
+                document.getElementById('analyzerScreen').style.display = 'block';
+                pushLog(`ĐÃ ĐẢO NGƯỢC KẾT QUẢ THÀNH: ${finalLearnedResult}`, "err");
             } else {
-                txNode.textContent = "XỈU";
-                txNode.className = "result-value val-xiu";
+                document.getElementById('analyzerScreen').style.display = 'block';
+                pushLog(`GHI NHẬN CHÍNH XÁC. GIỮ NGUYÊN KẾT QUẢ: ${finalLearnedResult}`, "succ");
             }
 
-            if (parityCheck % 2 === 0) {
-                clNode.textContent = "CHẴN";
-                clNode.className = "result-value val-chan";
-            } else {
-                clNode.textContent = "LẺ";
-                clNode.className = "result-value val-le";
-            }
+            // LƯU VÀO TRÌNH DUYỆT CỦA BẠN
+            aiMemory[currentMd5] = finalLearnedResult;
+            localStorage.setItem('vnexus_ai_dataset', JSON.stringify(aiMemory));
+            
+            pushLog("Đã lưu Database thành công! Sẵn sàng cho ván sau.", "sys");
 
-            const endTime = performance.now();
-
-            document.getElementById('statTheta').textContent = `${theta.toFixed(6)} rad`;
-            document.getElementById('statLambda').textContent = `${lambda.toFixed(6)}`;
-            document.getElementById('statDet').textContent = `${tensorDet.toExponential(4)}`;
-            document.getElementById('statTime').textContent = `${(endTime - startTime).toFixed(2)} ms`;
-
-            // Reset Nút
+            // Đổi UI sang trạng thái chờ nhập mã mới
+            document.getElementById('feedbackSection').style.display = 'none';
             document.getElementById('btnExecute').style.display = 'block';
-            document.getElementById('btnExecute').textContent = "RUN NEW HASH";
+            document.getElementById('btnExecute').textContent = "PHÂN TÍCH MÃ TIẾP THEO";
+            document.getElementById('md5Input').value = ""; // Xóa ô nhập liệu
         }
     </script>
 </body>
