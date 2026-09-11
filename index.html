@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD5 Advanced Predictor PRO (Turbo)</title>
+    <title>MD5 QUANTUM PREDICTOR</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,8 +13,8 @@
         }
 
         body {
-            background-color: #050505;
-            color: #00ff00;
+            background-color: #030712;
+            color: #10b981;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,106 +23,124 @@
         }
 
         .container {
-            background-color: #111;
+            background-color: #020617;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
             width: 100%;
             max-width: 550px;
-            border: 1px solid #333;
+            border: 1px solid #1e293b;
         }
 
         h1 {
-            color: #00ff00;
+            color: #10b981;
             margin-bottom: 5px;
-            font-size: 22px;
+            font-size: 24px;
             text-align: center;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
         }
 
         p.desc {
-            color: #555;
-            font-size: 12px;
+            color: #64748b;
+            font-size: 13px;
             text-align: center;
             margin-bottom: 25px;
         }
 
         input {
             width: 100%;
-            padding: 15px;
-            border: 1px solid #333;
-            background-color: #000;
-            color: #00ff00;
-            font-size: 16px;
+            padding: 18px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: #38bdf8;
+            font-size: 18px;
             outline: none;
             text-align: center;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            border-radius: 6px;
+            font-weight: bold;
         }
 
         input:focus {
-            border-color: #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
         }
 
         button {
             width: 100%;
-            padding: 15px;
-            margin-top: 15px;
-            background-color: #004400;
-            color: #00ff00;
-            border: 1px solid #00ff00;
-            font-size: 16px;
+            padding: 16px;
+            margin-top: 20px;
+            background-color: #0f766e;
+            color: #ffffff;
+            border: none;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s;
             text-transform: uppercase;
             letter-spacing: 2px;
+            border-radius: 6px;
         }
 
         button:hover {
-            background-color: #00ff00;
-            color: #000;
+            background-color: #14b8a6;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
         }
 
-        /* Màn hình Terminal giả lập */
+        /* Terminal siêu tốc */
         .terminal {
             display: none;
-            margin-top: 20px;
-            background-color: #000;
-            border: 1px solid #333;
+            margin-top: 25px;
+            background-color: #000000;
+            border: 1px solid #1e293b;
             padding: 15px;
-            height: 160px;
+            height: 180px;
+            border-radius: 6px;
             overflow-y: hidden;
             font-size: 13px;
-            color: #00aa00;
+            color: #10b981;
             text-align: left;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        .terminal p { margin: 5px 0; }
+        .terminal p { margin: 4px 0; }
+        .highlight { color: #facc15; }
         
         .result-box {
             display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #111;
-            border: 1px dashed #00ff00;
+            margin-top: 25px;
+            padding: 25px;
+            background-color: #020617;
+            border-radius: 8px;
             text-align: center;
         }
 
         .result-box h2 {
-            font-size: 45px;
-            letter-spacing: 5px;
-            margin-top: 10px;
+            font-size: 55px;
+            letter-spacing: 8px;
+            margin-top: 15px;
+            margin-bottom: 10px;
         }
 
-        .tai { color: #00ff00; text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
-        .xiu { color: #ff0044; text-shadow: 0 0 10px rgba(255, 0, 68, 0.5); }
+        .tai { color: #22c55e; text-shadow: 0 0 20px rgba(34, 197, 94, 0.6); border: 2px solid #22c55e;}
+        .xiu { color: #ef4444; text-shadow: 0 0 20px rgba(239, 68, 68, 0.6); border: 2px solid #ef4444;}
         
+        /* Stats Box hiện thông số */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #334155;
+        }
+
         .error {
-            color: #ff0044;
-            margin-top: 10px;
-            font-size: 13px;
+            color: #ef4444;
+            margin-top: 15px;
+            font-size: 14px;
             display: none;
             text-align: center;
         }
@@ -131,14 +149,14 @@
 <body>
 
     <div class="container">
-        <h1>[ SYSTEM: MD5 TURBO ]</h1>
-        <p class="desc">v3.1 - Fast Neural Recognition</p>
+        <h1>[ QUANTUM MD5 CORE ]</h1>
+        <p class="desc">v4.0 - Perfect 50/50 Distribution Algorithm</p>
 
-        <input type="text" id="md5Input" placeholder="Nhập MD5 Hash (32-bit)" autocomplete="off">
+        <input type="text" id="md5Input" placeholder="DÁN MÃ MD5 VÀO ĐÂY" autocomplete="off" spellcheck="false">
         
-        <button onclick="startAnalysis()">PHÂN TÍCH NHANH</button>
+        <button onclick="startAnalysis()">KÍCH HOẠT QUÉT</button>
         
-        <div id="errorMsg" class="error">ERROR: Invalid Hash Format</div>
+        <div id="errorMsg" class="error">❌ Định dạng sai! Yêu cầu chuẩn 32 ký tự Hex.</div>
 
         <div id="terminal" class="terminal">
             <div id="logContent"></div>
@@ -146,8 +164,13 @@
         </div>
 
         <div id="resultBox" class="result-box">
-            <div style="color: #666; font-size: 12px;">>>> FINAL PREDICTION <<<</div>
+            <div style="color: #64748b; font-size: 14px; letter-spacing: 2px;">KẾT QUẢ ĐÃ GIẢI MÃ</div>
             <h2 id="predictionText"></h2>
+            
+            <div class="stats">
+                <span id="statHash">Hash Lõi: ---</span>
+                <span id="statParity">Biến thiên: ---</span>
+            </div>
         </div>
     </div>
 
@@ -169,6 +192,7 @@
 
             errorMsg.style.display = 'none';
             resultBox.style.display = 'none';
+            resultBox.className = "result-box"; // Reset class
             logContent.innerHTML = '';
 
             const md5Regex = /^[a-f0-9]{32}$/;
@@ -180,45 +204,47 @@
 
             terminal.style.display = 'block';
 
-            // Tốc độ chạy siêu tốc (mỗi dòng cách nhau chỉ 100-150ms)
-            printLog("Connecting...", 50, () => {
-                printLog("Extracting: " + inputVal.substring(0, 16) + "...", 100, () => {
+            // Tốc độ lướt siêu nhanh (dưới 1 giây tổng cộng)
+            printLog("Khởi tạo lõi lượng tử (Quantum Core)...", 50, () => {
+                printLog("Đang nạp 32-byte Hash...", 150, () => {
                     
-                    let xorSum = 0;
-                    for (let i = 0; i < 32; i += 2) {
-                        xorSum ^= parseInt(inputVal.substring(i, i+2), 16);
-                    }
-                    printLog(`Bitwise XOR Folding... [Core: ${xorSum}]`, 150, () => {
-                        
-                        let weightSum = 0;
-                        for(let i = 0; i < 32; i++) {
-                            weightSum += parseInt(inputVal[i], 16) * (i + 1);
-                        }
-                        printLog(`Positional Weight... [Weight: ${weightSum}]`, 150, () => {
+                    // THUẬT TOÁN 4-BLOCK XOR ĐẢM BẢO TỶ LỆ 50/50
+                    // Chia 32 ký tự thành 4 khối, mỗi khối 8 ký tự
+                    let block1 = parseInt(inputVal.substring(0, 8), 16);
+                    let block2 = parseInt(inputVal.substring(8, 16), 16);
+                    let block3 = parseInt(inputVal.substring(16, 24), 16);
+                    let block4 = parseInt(inputVal.substring(24, 32), 16);
+
+                    printLog(`Gập khối 1 & 2... <span class="highlight">[OK]</span>`, 250, () => {
+                        printLog(`Gập khối 3 & 4... <span class="highlight">[OK]</span>`, 350, () => {
                             
-                            let numCount = inputVal.replace(/[a-f]/g, '').length;
-                            printLog(`Analyzing Entropy... [Num: ${numCount}]`, 150, () => {
-                                printLog("Decoupling parameters...", 150, () => {
-                                    
-                                    let finalScore = xorSum + weightSum + numCount;
+                            // Ép 4 khối thành 1 mã Lõi duy nhất
+                            let coreHash = block1 ^ block2 ^ block3 ^ block4;
+                            let hexCore = Math.abs(coreHash).toString(16).toUpperCase();
+                            
+                            printLog(`Trích xuất mã Lõi: <span class="highlight">0x${hexCore}</span>`, 450, () => {
+                                printLog("Đang đối chiếu điểm kỳ dị (Parity Check)...", 550, () => {
                                     
                                     setTimeout(() => {
                                         terminal.style.display = 'none';
                                         
                                         const predictionNode = document.getElementById('predictionText');
                                         
-                                        if (finalScore % 2 === 0) {
+                                        // Tính chẵn lẻ của mã Lõi - Đảm bảo phân bổ chính xác 50%
+                                        if (coreHash % 2 === 0) {
                                             predictionNode.textContent = "TÀI";
-                                            predictionNode.className = "tai";
-                                            resultBox.style.border = "1px dashed #00ff00";
+                                            resultBox.classList.add("tai");
+                                            document.getElementById('statParity').textContent = "Biến thiên: CHẴN";
                                         } else {
                                             predictionNode.textContent = "XỈU";
-                                            predictionNode.className = "xiu";
-                                            resultBox.style.border = "1px dashed #ff0044";
+                                            resultBox.classList.add("xiu");
+                                            document.getElementById('statParity').textContent = "Biến thiên: LẺ";
                                         }
                                         
+                                        document.getElementById('statHash').textContent = `Mã Lõi: 0x${hexCore.substring(0,6)}`;
                                         resultBox.style.display = 'block';
-                                    }, 200);
+                                        
+                                    }, 700);
 
                                 });
                             });
