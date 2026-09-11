@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD5 Advanced Predictor PRO</title>
+    <title>MD5 Advanced Predictor PRO (Turbo)</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Courier New', Courier, monospace; /* Đổi font sang dạng Hacker/Code */
+            font-family: 'Courier New', Courier, monospace;
         }
 
         body {
@@ -100,13 +100,7 @@
         }
 
         .terminal p { margin: 5px 0; }
-        .blink { animation: blink-animation 1s steps(2, start) infinite; }
         
-        @keyframes blink-animation {
-            to { visibility: hidden; }
-        }
-
-        /* Khung kết quả */
         .result-box {
             display: none;
             margin-top: 20px;
@@ -137,22 +131,20 @@
 <body>
 
     <div class="container">
-        <h1>[ SYSTEM: MD5 ANALYZER ]</h1>
-        <p class="desc">v3.0 - Neural Hash Recognition</p>
+        <h1>[ SYSTEM: MD5 TURBO ]</h1>
+        <p class="desc">v3.1 - Fast Neural Recognition</p>
 
         <input type="text" id="md5Input" placeholder="Nhập MD5 Hash (32-bit)" autocomplete="off">
         
-        <button onclick="startAnalysis()">Bắt đầu phân tích</button>
+        <button onclick="startAnalysis()">PHÂN TÍCH NHANH</button>
         
-        <div id="errorMsg" class="error">ERROR: Invalid Hash Length/Format</div>
+        <div id="errorMsg" class="error">ERROR: Invalid Hash Format</div>
 
-        <!-- Màn hình Console -->
         <div id="terminal" class="terminal">
             <div id="logContent"></div>
-            <span class="blink">_</span>
+            <span>_</span>
         </div>
 
-        <!-- Kết quả -->
         <div id="resultBox" class="result-box">
             <div style="color: #666; font-size: 12px;">>>> FINAL PREDICTION <<<</div>
             <h2 id="predictionText"></h2>
@@ -160,7 +152,6 @@
     </div>
 
     <script>
-        // Hàm in từng dòng log ra màn hình console
         function printLog(text, delay, callback) {
             setTimeout(() => {
                 const logContent = document.getElementById('logContent');
@@ -176,7 +167,6 @@
             const logContent = document.getElementById('logContent');
             const resultBox = document.getElementById('resultBox');
 
-            // Reset UI
             errorMsg.style.display = 'none';
             resultBox.style.display = 'none';
             logContent.innerHTML = '';
@@ -188,43 +178,35 @@
                 return;
             }
 
-            // Hiện terminal
             terminal.style.display = 'block';
 
-            // Chạy hiệu ứng Log phân tích cao cấp
-            printLog("Connecting to matrix algorithm...", 200, () => {
-                printLog("Extracting hash: " + inputVal.substring(0, 16) + "...", 800, () => {
+            // Tốc độ chạy siêu tốc (mỗi dòng cách nhau chỉ 100-150ms)
+            printLog("Connecting...", 50, () => {
+                printLog("Extracting: " + inputVal.substring(0, 16) + "...", 100, () => {
                     
-                    // THUẬT TOÁN 1: BITWISE XOR
                     let xorSum = 0;
                     for (let i = 0; i < 32; i += 2) {
                         xorSum ^= parseInt(inputVal.substring(i, i+2), 16);
                     }
-                    printLog(`Executing Bitwise XOR Folding... [Core: ${xorSum}]`, 1500, () => {
+                    printLog(`Bitwise XOR Folding... [Core: ${xorSum}]`, 150, () => {
                         
-                        // THUẬT TOÁN 2: POSITIONAL WEIGHT MATRIX (PWM)
                         let weightSum = 0;
                         for(let i = 0; i < 32; i++) {
                             weightSum += parseInt(inputVal[i], 16) * (i + 1);
                         }
-                        printLog(`Calculating Positional Weight (PWM)... [Weight: ${weightSum}]`, 2200, () => {
+                        printLog(`Positional Weight... [Weight: ${weightSum}]`, 150, () => {
                             
-                            // THUẬT TOÁN 3: CHARACTER RATIO (NUM vs ALPHA)
                             let numCount = inputVal.replace(/[a-f]/g, '').length;
-                            printLog(`Analyzing Entropy (Numbers: ${numCount}/32)...`, 2900, () => {
-                                printLog("Decoupling final parameters...", 3600, () => {
+                            printLog(`Analyzing Entropy... [Num: ${numCount}]`, 150, () => {
+                                printLog("Decoupling parameters...", 150, () => {
                                     
-                                    // TỔNG HỢP & XUẤT KẾT QUẢ
-                                    // Trộn cả 3 biến số thuật toán để quyết định
                                     let finalScore = xorSum + weightSum + numCount;
                                     
-                                    // Ẩn terminal và hiện kết quả
                                     setTimeout(() => {
                                         terminal.style.display = 'none';
                                         
                                         const predictionNode = document.getElementById('predictionText');
                                         
-                                        // Tính chẵn lẻ của tổng ma trận
                                         if (finalScore % 2 === 0) {
                                             predictionNode.textContent = "TÀI";
                                             predictionNode.className = "tai";
@@ -236,7 +218,7 @@
                                         }
                                         
                                         resultBox.style.display = 'block';
-                                    }, 4500);
+                                    }, 200);
 
                                 });
                             });
