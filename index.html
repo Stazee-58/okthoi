@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD5 DEEP NEURAL NETWORK v5.0</title>
+    <title>MD5 DEEP NEURAL NETWORK v5.1</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
@@ -144,12 +144,14 @@
         .tai { color: #10b981; text-shadow: 0 0 20px #10b981; }
         .xiu { color: #f43f5e; text-shadow: 0 0 20px #f43f5e; }
 
-        .confidence {
-            font-size: 18px;
-            color: #facc15;
-            margin-top: 10px;
-            text-shadow: 0 0 10px #facc15;
+        .sub-prediction {
+            font-size: 24px;
+            margin-top: 15px;
+            letter-spacing: 3px;
         }
+
+        .chan { color: #facc15; text-shadow: 0 0 15px #facc15; }
+        .le { color: #c084fc; text-shadow: 0 0 15px #c084fc; }
         
         .disclaimer { font-size: 10px; color: #475569; text-align: center; margin-top: 20px; }
     </style>
@@ -157,14 +159,13 @@
 <body>
 
     <div class="container">
-        <h1>[ DEEP NEURAL V5.0 ]</h1>
+        <h1>[ DEEP NEURAL V5.1 ]</h1>
         <input type="text" id="md5Input" placeholder="ENTER 32-BIT MD5 HASH" maxlength="32">
         <button onclick="startDeepAnalysis()" id="btnStart">INITIATE ALGORITHM</button>
 
-        <!-- Bảng đa luồng tiến trình -->
         <div class="process-grid" id="processGrid">
             <div class="module">
-                <div class="module-title">1. Binary Matrix Extract</div>
+                <div class="module-title">1. Binary Extract</div>
                 <div class="progress-bar"><div class="progress-fill" id="fill1"></div></div>
                 <div class="module-status" id="stat1">0%</div>
             </div>
@@ -174,25 +175,24 @@
                 <div class="module-status" id="stat2">0%</div>
             </div>
             <div class="module">
-                <div class="module-title">3. Neural Pattern Match</div>
+                <div class="module-title">3. Neural Pattern</div>
                 <div class="progress-bar"><div class="progress-fill" id="fill3"></div></div>
                 <div class="module-status" id="stat3">0%</div>
             </div>
             <div class="module">
-                <div class="module-title">4. Probability Calc</div>
+                <div class="module-title">4. Parity Calc</div>
                 <div class="progress-bar"><div class="progress-fill" id="fill4"></div></div>
                 <div class="module-status" id="stat4">0%</div>
             </div>
         </div>
 
-        <!-- Khung hiển thị kết quả -->
         <div class="final-result" id="resultBox">
             <h3>>>> AI PREDICTION <<<</h3>
             <h2 id="predictionText"></h2>
-            <div class="confidence" id="confidenceText">Accuracy: 82.4%</div>
+            <div id="parityText" class="sub-prediction"></div>
         </div>
         
-        <p class="disclaimer">SYSTEM STATUS: ONLINE | ALGORITHM: DETERMINISTIC</p>
+        <p class="disclaimer">SYSTEM STATUS: ONLINE | ALGORITHM: T/X + C/L</p>
     </div>
 
     <script>
@@ -228,18 +228,15 @@
                 return;
             }
 
-            // Reset UI
             document.getElementById('btnStart').style.display = 'none';
             document.getElementById('processGrid').style.display = 'grid';
             document.getElementById('resultBox').style.display = 'none';
             
-            // Reset Progress bars
             for(let i=1; i<=4; i++) {
                 document.getElementById(`fill${i}`).style.width = '0%';
                 document.getElementById(`stat${i}`).textContent = '0%';
             }
 
-            // Chạy đồng thời 4 tiến trình ảo với độ trễ khác nhau
             await Promise.all([
                 runProgress('fill1', 'stat1', 800, 0),
                 runProgress('fill2', 'stat2', 1200, 200),
@@ -247,21 +244,17 @@
                 runProgress('fill4', 'stat4', 900, 600)
             ]);
 
-            // ===== CÔNG THỨC TÍNH TOÁN SIÊU CẤP (DETERMINISTIC) =====
-            // Bước 1: Chuyển 16 ký tự cuối thành một số BigInt giả lập
+            // ===== THUẬT TOÁN TÍNH TÀI / XỈU =====
             let coreStr = inputVal.substring(16, 32);
             let complexNum = 0;
             
-            // Tính toán ma trận trọng số dựa trên mã ASCII và Vị trí
             for (let i = 0; i < coreStr.length; i++) {
                 complexNum += (coreStr.charCodeAt(i) * Math.pow(i + 1, 2));
             }
             
-            // Trộn với 8 ký tự đầu để tạo Chaos
             let chaos = parseInt(inputVal.substring(0, 8), 16);
             let finalValue = (complexNum ^ chaos);
 
-            // Xác định Tài/Xỉu
             const predictionNode = document.getElementById('predictionText');
             if (finalValue % 2 === 0) {
                 predictionNode.textContent = "TÀI";
@@ -271,11 +264,18 @@
                 predictionNode.className = "xiu";
             }
 
-            // Tạo Tỷ lệ chuẩn xác (luôn dao động từ 78.1% đến 84.9%)
-            // Lấy 3 số cuối của finalValue để tạo tỷ lệ cố định cho mã này
-            let rateSeed = finalValue % 1000; 
-            let accuracy = 78.1 + (rateSeed / 1000) * 6.8; 
-            document.getElementById('confidenceText').textContent = `AI Confidence: ${accuracy.toFixed(1)}%`;
+            // ===== THUẬT TOÁN TÍNH CHẴN / LẺ =====
+            // Lấy khúc giữa của MD5 đem trộn với finalValue để tạo biến phụ
+            let paritySeed = parseInt(inputVal.substring(8, 16), 16) ^ finalValue;
+            const parityNode = document.getElementById('parityText');
+            
+            if (paritySeed % 2 === 0) {
+                parityNode.textContent = "[ CHẴN ]";
+                parityNode.className = "sub-prediction chan";
+            } else {
+                parityNode.textContent = "[ LẺ ]";
+                parityNode.className = "sub-prediction le";
+            }
 
             // Hiển thị kết quả
             document.getElementById('processGrid').style.display = 'none';
