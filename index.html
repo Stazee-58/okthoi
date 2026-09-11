@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Dự Đoán MD5</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p.desc {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #334155;
+            background-color: #0f172a;
+            color: #22d3ee;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            text-align: center;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.4);
+        }
+
+        /* Hiệu ứng loading */
+        .loading {
+            display: none;
+            margin-top: 25px;
+            color: #facc15;
+            font-weight: 500;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Khung kết quả */
+        .result-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #0f172a;
+            border-radius: 8px;
+            border: 1px solid #475569;
+        }
+
+        .result-box h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .tai { color: #22c55e; } /* Màu xanh lá cho TÀI */
+        .xiu { color: #ef4444; } /* Màu đỏ cho XỈU */
+        
+        .error {
+            color: #ef4444;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🤖 TOOL DỰ ĐOÁN MD5</h1>
+        <p class="desc">Dán mã MD5 của phiên vào ô bên dưới để AI phân tích xác suất</p>
+
+        <input type="text" id="md5Input" placeholder="Nhập chuỗi MD5 (32 ký tự)" autocomplete="off" spellcheck="false">
+        
+        <button onclick="startPrediction()">PHÂN TÍCH NGAY</button>
+
+        <div id="errorMsg" class="error">❌ Mã không hợp lệ! Vui lòng nhập đúng mã MD5 gồm 32 ký tự.</div>
+
+        <div id="loading" class="loading">
+            ⏳ Đang chạy thuật toán giải mã hạt giống...
+        </div>
+
+        <div id="resultBox" class="result-box">
+            <h3 style="color: #94a3b8; font-size: 14px; margin-bottom: 5px;">KẾT QUẢ DỰ ĐOÁN:</h3>
+            <h2 id="predictionText">TÀI</h2>
+            <p style="color: #cbd5e1;">Tỷ lệ tự tin: <strong id="confidenceText" style="color: #facc15;">75%</strong></p>
+        </div>
+    </div>
+
+    <script>
+        function startPrediction() {
+            const inputVal = document.getElementById('md5Input').value.trim().toLowerCase();
+            const errorMsg = document.getElementById('errorMsg');
+            const loading = document.getElementById('loading');
+            const resultBox = document.getElementById('resultBox');
+
+            // Ẩn các thông báo cũ
+            errorMsg.style.display = 'none';
+            resultBox.style.display = 'none';
+
+            // Biểu thức chính quy (Regex) kiểm tra mã MD5
+            const md5Regex = /^[a-f0-9]{32}$/;
+
+            if (!md5Regex.test(inputVal)) {
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // Hiển thị hiệu ứng loading
+            loading.style.display = 'block';
+
+            // Giả lập thời gian delay để tạo cảm giác tool đang "suy nghĩ"
+            setTimeout(() => {
+                loading.style.display = 'none';
+                
+                // THUẬT TOÁN HẠT GIỐNG (SEED):
+                // Cắt 8 ký tự đầu của chuỗi MD5 để chuyển thành 1 số nguyên
+                const seedHex = inputVal.substring(0, 8);
+                const seedNum = parseInt(seedHex, 16);
+
+                // Tính toán tỷ lệ từ số nguyên (sẽ cho ra từ 25 đến 75)
+                const tyLeTai = (seedNum % 51) + 25; 
+                const tyLeXiu = 100 - tyLeTai;
+
+                let resultStr = "";
+                let confidence = 0;
+                let cssClass = "";
+
+                if (tyLeTai > tyLeXiu) {
+                    resultStr = "TÀI";
+                    confidence = tyLeTai;
+                    cssClass = "tai";
+                } else {
+                    resultStr = "XỈU";
+                    confidence = tyLeXiu;
+                    cssClass = "xiu";
+                }
+
+                // Đổ dữ liệu ra giao diện
+                const predictionNode = document.getElementById('predictionText');
+                predictionNode.textContent = resultStr;
+                predictionNode.className = cssClass; // Gắn màu (Xanh Tài, Đỏ Xỉu)
+                
+                document.getElementById('confidenceText').textContent = confidence + "%";
+                
+                // Hiển thị khung kết quả
+                resultBox.style.display = 'block';
+
+            }, 1500); // Trễ 1.5 giây
+        }
+    </script>
+</body>
+</html>
