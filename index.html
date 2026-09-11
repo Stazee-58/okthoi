@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Predictor - Cute Edition 🌸</title>
+    <title>NEXUS AI - Smart Predictor</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap');
 
         :root {
-            --bg-gradient: linear-gradient(135deg, #ffd1ff 0%, #fae1dd 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --primary-pink: #ffb6c1;
-            --primary-blue: #a3c4f3;
-            --text-dark: #5c4d5d;
-            --text-light: #8e7f8f;
-            --shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            /* Bảng màu Lofi Dark (Catppuccin Mocha style) */
+            --bg-color: #11111b;
+            --card-bg: #1e1e2e;
+            --surface-bg: #313244;
+            --text-main: #cdd6f4;
+            --text-muted: #a6adc8;
+            --accent-blue: #89b4fa;
+            --accent-pink: #f5c2e7;
+            --accent-green: #a6e3a1;
+            --accent-red: #f38ba8;
+            --border-color: #45475a;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background: var(--bg-gradient);
-            color: var(--text-dark);
-            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Nunito', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,23 +40,14 @@
             padding: 40px;
             width: 100%;
             max-width: 550px;
-            border-radius: 30px;
-            box-shadow: var(--shadow);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             text-align: center;
-            border: 3px solid #fff;
-            position: relative;
-        }
-
-        /* Trang trí tai thỏ/nơ (tùy chọn) */
-        .decoration {
-            font-size: 40px;
-            margin-bottom: -15px;
-            position: relative;
-            z-index: 2;
+            border: 1px solid var(--border-color);
         }
 
         h1 {
-            color: #ff9eaa;
+            color: var(--accent-blue);
             font-size: 32px;
             margin-bottom: 5px;
             font-weight: 900;
@@ -61,222 +56,220 @@
 
         .subtitle {
             font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 30px;
-            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* Ô nhập liệu bo tròn, text ở giữa */
+        /* Ô nhập liệu */
         .input-wrapper {
-            background: #fff;
-            border: 2px solid #ffe1e6;
-            border-radius: 50px;
+            background: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
             padding: 5px 20px;
             margin-bottom: 25px;
             transition: all 0.3s;
-            box-shadow: inset 0 3px 10px rgba(0,0,0,0.02);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .input-wrapper:focus-within {
-            border-color: var(--primary-pink);
-            box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(137, 180, 250, 0.1);
         }
         
         input {
             width: 100%;
             background: transparent;
             border: none;
-            padding: 15px 0;
-            color: var(--text-dark);
+            padding: 16px 0;
+            color: var(--text-main);
             font-size: 16px;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
             text-align: center;
             outline: none;
-            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         input::placeholder {
-            color: #d1c8d1;
-            text-transform: none;
+            color: #585b70;
         }
 
         button {
             width: 100%;
-            padding: 18px;
-            background: var(--primary-pink);
-            color: #fff;
+            padding: 16px;
+            background: var(--accent-blue);
+            color: var(--bg-color);
             border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
+            border-radius: 16px;
+            font-size: 16px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.5);
+            transition: all 0.2s;
             letter-spacing: 1px;
         }
 
         button:hover {
-            transform: translateY(-3px);
-            background: #ff9eaa;
-            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.6);
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        /* Màn hình log siêu cute */
+        /* Màn hình log gọn gàng */
         .analyzer-screen {
             display: none;
             margin-top: 25px;
-            background: #fffafa;
-            border: 2px dashed #ffc0cb;
-            border-radius: 20px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             padding: 20px;
-            height: 200px;
+            height: 180px;
             overflow-y: auto;
-            text-align: center; /* Cân giữa text log */
+            text-align: left;
         }
 
         .code-lines {
             font-size: 14px;
             line-height: 1.8;
-            font-weight: 700;
+            font-family: monospace;
+            color: var(--text-muted);
         }
         
-        .log-sys { color: #a3c4f3; }
-        .log-warn { color: #fbc4ab; }
-        .log-err { color: #ffb5a7; }
-        .log-succ { color: #b5e48c; }
+        .log-sys { color: var(--accent-blue); }
+        .log-warn { color: var(--accent-pink); }
+        .log-succ { color: var(--accent-green); }
 
         /* Vùng kết quả */
         .result-container {
             display: none;
             margin-top: 25px;
             padding: 30px 20px;
-            background: #fff;
-            border: 2px solid #ffe1e6;
-            border-radius: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            background: var(--surface-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
         }
 
         .result-title {
-            font-size: 14px;
-            color: var(--text-light);
+            font-size: 13px;
+            color: var(--text-muted);
             margin-bottom: 10px;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: 2px;
         }
 
         .result-value {
-            font-size: 60px;
+            font-size: 50px;
             font-weight: 900;
             letter-spacing: 4px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
-        .val-tai { color: var(--primary-blue); text-shadow: 2px 2px 0px #e1eeff; }
-        .val-xiu { color: var(--primary-pink); text-shadow: 2px 2px 0px #ffe1e6; }
+        .val-tai { color: var(--accent-blue); }
+        .val-xiu { color: var(--accent-pink); }
 
         .stats {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             font-size: 13px;
-            color: var(--text-light);
-            font-weight: 700;
+            color: var(--text-muted);
+            font-weight: 600;
         }
-        .stats span { color: var(--text-dark); background: #f8f9fa; padding: 4px 10px; border-radius: 12px;}
+        .stats span { color: var(--text-main); background: var(--bg-color); padding: 6px 12px; border-radius: 8px;}
 
         /* Nút Feedback đối xứng tuyệt đối */
         .feedback-section {
             display: none;
             margin-top: 25px;
             padding-top: 25px;
-            border-top: 2px dashed #ffe1e6;
-        }
-
-        .feedback-title {
-            font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 15px;
-            font-weight: 700;
+            border-top: 1px dashed var(--border-color);
         }
 
         .btn-group {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Chia đôi tuyệt đối */
             gap: 15px;
         }
         
         .btn-group button {
-            flex: 1; /* Chia đều 50% mỗi nút */
-            padding: 15px;
-            border-radius: 25px;
-            font-size: 15px;
-            box-shadow: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-correct {
-            background: #e8f5e9;
-            color: #4caf50;
+            background: rgba(166, 227, 161, 0.1);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
         }
-        .btn-correct:hover { background: #4caf50; color: #fff; transform: translateY(-2px); }
+        .btn-correct:hover { background: var(--accent-green); color: var(--bg-color); transform: translateY(-2px); }
         
         .btn-incorrect {
-            background: #ffebee;
-            color: #f44336;
+            background: rgba(243, 139, 168, 0.1);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
         }
-        .btn-incorrect:hover { background: #f44336; color: #fff; transform: translateY(-2px); }
+        .btn-incorrect:hover { background: var(--accent-red); color: var(--bg-color); transform: translateY(-2px); }
 
+        /* Tùy chỉnh thanh cuộn */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="decoration">✨🎀✨</div>
-        <h1>Bé AI Học Việc</h1>
-        <div class="subtitle">MÔ HÌNH HỌC TẬP QUA TỪNG VÁN</div>
+        <h1>NEXUS AI</h1>
+        <div class="subtitle">MÔ HÌNH MÁY HỌC CỤC BỘ</div>
         
         <div class="input-wrapper">
-            <input type="text" id="md5Input" placeholder="Nhập mã MD5 vào đây nha..." maxlength="32">
+            <input type="text" id="md5Input" placeholder="Nhập mã MD5 (32 ký tự)" maxlength="32">
         </div>
         
-        <button onclick="executeLogic()" id="btnExecute">✨ PHÂN TÍCH MÃ NÀY ✨</button>
+        <button onclick="executeLogic()" id="btnExecute">PHÂN TÍCH DỮ LIỆU</button>
 
         <div class="analyzer-screen" id="analyzerScreen">
             <div id="codeConsole" class="code-lines"></div>
         </div>
 
         <div id="finalOutput" class="result-container">
-            <div class="result-title">BÉ ĐOÁN LÀ:</div>
+            <div class="result-title">KẾT QUẢ DỰ ĐOÁN</div>
             <div id="resTaiXiu" class="result-value"></div>
             
             <div class="stats">
-                <div>Nguồn: <span id="statMatch">Mới Tinh</span></div>
-                <div>Hex-Weight: <span id="statWeight">0</span></div>
+                <div>Dữ liệu: <span id="statMatch">Mới</span></div>
+                <div>Trọng số: <span id="statWeight">0</span></div>
             </div>
 
             <!-- Khu vực Dạy AI cân xứng -->
             <div class="feedback-section" id="feedbackSection">
-                <div class="feedback-title">BÉ ĐOÁN CÓ ĐÚNG KHÔNG Ạ?</div>
+                <div class="result-title" style="margin-bottom: 15px;">XÁC NHẬN ĐỂ HUẤN LUYỆN AI</div>
                 <div class="btn-group">
-                    <button onclick="sendFeedback(true)" class="btn-correct">💖 DẠ ĐÚNG</button>
-                    <button onclick="sendFeedback(false)" class="btn-incorrect">💔 SAI (ĐẢO LẠI)</button>
+                    <button onclick="sendFeedback(true)" class="btn-correct">✓ CHÍNH XÁC</button>
+                    <button onclick="sendFeedback(false)" class="btn-incorrect">✗ ĐẢO NGƯỢC</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Khởi tạo/Lấy dữ liệu LocalStorage (Bộ nhớ AI)
-        let aiMemory = JSON.parse(localStorage.getItem('cute_ai_dataset')) || {};
+        let aiMemory = JSON.parse(localStorage.getItem('nexus_ai_v2')) || {};
         let currentMd5 = "";
         let currentPrediction = "";
 
         function pushLog(text, type = "sys") {
             const cons = document.getElementById('codeConsole');
-            cons.innerHTML += `<div class="log-${type}">${text}</div>`;
+            cons.innerHTML += `<div class="log-${type}">> ${text}</div>`;
             cons.scrollTop = cons.scrollHeight;
         }
 
@@ -285,7 +278,7 @@
         async function executeLogic() {
             const inputVal = document.getElementById('md5Input').value.trim().toLowerCase();
             if (inputVal.length !== 32) {
-                alert("⚠️ Ui da! Mã MD5 phải có đủ 32 ký tự bạn nha!");
+                alert("Định dạng không hợp lệ. Yêu cầu chuỗi MD5 đúng 32 ký tự.");
                 return;
             }
 
@@ -297,53 +290,49 @@
             document.getElementById('analyzerScreen').style.display = 'block';
             document.getElementById('codeConsole').innerHTML = "";
 
-            pushLog("🌸 Đang mở cuốn sổ phép thuật...", "sys");
-            await sleep(500);
+            pushLog("Khởi tạo tiến trình phân tích...", "sys");
+            await sleep(400);
 
             let isMatched = false;
             let hexWeightSum = 0;
 
-            // KIỂM TRA BỘ NHỚ
             if (aiMemory[currentMd5]) {
-                pushLog(`✨ Ôi chao! Bé nhớ ra mã này rồi nè!`, "succ");
-                await sleep(600);
-                pushLog(`Lật tìm kết quả trong trí nhớ...`, "sys");
+                pushLog(`Phát hiện mã MD5 trùng khớp trong Local Storage.`, "succ");
+                await sleep(500);
+                pushLog(`Đang trích xuất dữ liệu đã huấn luyện...`, "sys");
                 
                 currentPrediction = aiMemory[currentMd5];
                 isMatched = true;
-                hexWeightSum = "Lưu trong trí nhớ";
+                hexWeightSum = "Lưu trữ nội bộ";
             } else {
-                pushLog("🔍 Hmmm mã này mới quá, để bé nhẩm tính chút nha...", "sys");
-                await sleep(500);
+                pushLog("Mã MD5 mới. Bắt đầu thuật toán tính trọng số...", "sys");
+                await sleep(400);
                 
                 for(let i = 0; i < currentMd5.length; i++) {
                     let val = parseInt(currentMd5[i], 16);
                     hexWeightSum += val;
                 }
 
-                pushLog(`Trọng lượng mã là: ${hexWeightSum}`, "warn");
-                await sleep(500);
+                pushLog(`Tổng trọng số Hex: ${hexWeightSum}`, "warn");
+                await sleep(400);
                 
                 if (hexWeightSum % 2 !== 0) {
                     currentPrediction = "TÀI";
                 } else {
                     currentPrediction = "XỈU";
                 }
-                pushLog(`Tính xong rồi! Chốt nha!`, "succ");
+                pushLog(`Hoàn tất dự đoán.`, "succ");
             }
 
-            await sleep(600);
+            await sleep(500);
             
-            // Render kết quả
             document.getElementById('analyzerScreen').style.display = 'none';
             document.getElementById('finalOutput').style.display = 'block';
             
             updateResultUI(currentPrediction);
             
-            document.getElementById('statMatch').textContent = isMatched ? "Trí Nhớ Cũ" : "Vừa Tính Xong";
+            document.getElementById('statMatch').textContent = isMatched ? "Đã huấn luyện" : "Tính toán mới";
             document.getElementById('statWeight').textContent = hexWeightSum;
-
-            // Hiện nút feedback để Train AI
             document.getElementById('feedbackSection').style.display = 'block';
         }
 
@@ -353,33 +342,29 @@
             txNode.className = result === "TÀI" ? "result-value val-tai" : "result-value val-xiu";
         }
 
-        // CƠ CHẾ TRAIN AI VÀ GHI LOG (LOCAL STORAGE)
         function sendFeedback(isCorrect) {
             let finalLearnedResult = currentPrediction;
 
             if (!isCorrect) {
-                // Đảo ngược kết quả nếu đoán sai
                 finalLearnedResult = currentPrediction === "TÀI" ? "XỈU" : "TÀI";
                 updateResultUI(finalLearnedResult);
                 
                 document.getElementById('analyzerScreen').style.display = 'block';
-                pushLog(`💦 Bé xin lỗi! Đã đổi kết quả thành: ${finalLearnedResult}`, "err");
+                pushLog(`Xác nhận sai. Đã đảo ngược kết quả thành: ${finalLearnedResult}`, "warn");
             } else {
                 document.getElementById('analyzerScreen').style.display = 'block';
-                pushLog(`💖 Yeyyy! Bé đoán trúng rồi!`, "succ");
+                pushLog(`Dự đoán chính xác. Tiến hành ghi nhớ...`, "succ");
             }
 
-            // LƯU VÀO TRÌNH DUYỆT
             aiMemory[currentMd5] = finalLearnedResult;
-            localStorage.setItem('cute_ai_dataset', JSON.stringify(aiMemory));
+            localStorage.setItem('nexus_ai_v2', JSON.stringify(aiMemory));
             
-            pushLog("Đã chép cẩn thận vào sổ tay! Sẵn sàng cho ván mới 🌸", "sys");
+            pushLog("Đã cập nhật cơ sở dữ liệu. Sẵn sàng cho truy vấn mới.", "sys");
 
-            // Đổi UI sang trạng thái chờ nhập mã mới
             document.getElementById('feedbackSection').style.display = 'none';
             document.getElementById('btnExecute').style.display = 'block';
-            document.getElementById('btnExecute').textContent = "✨ PHÂN TÍCH TIẾP NHA ✨";
-            document.getElementById('md5Input').value = ""; // Xóa ô nhập liệu
+            document.getElementById('btnExecute').textContent = "PHÂN TÍCH MÃ TIẾP THEO";
+            document.getElementById('md5Input').value = "";
         }
     </script>
 </body>
