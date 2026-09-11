@@ -331,15 +331,24 @@
             pushLog(`ƒ(Z_{n+1}) = sin(Z_n²) + (${c_real.toFixed(4)} + ${c_imag.toFixed(4)}i)`, "math");
             await sleep(500);
 
-            // Chạy 100 vòng lặp lượng tử
+            // Chạy 100 vòng lặp lượng tử với cơ chế RENORMALIZATION
             for(let i = 1; i <= 100; i++) {
                 let Z_squared = Z.mul(Z); // Z^2
                 let Z_sin = Z_squared.sin(); // sin(Z^2)
                 Z = Z_sin.add(C); // sin(Z^2) + C
                 
+                // CƠ CHẾ BẢO TOÀN NĂNG LƯỢNG (RENORMALIZATION)
+                // Ngăn chặn sự phân kỳ đến Vô cực (Infinity) sinh ra lỗi NaN
+                let mag = Z.mag();
+                if (mag > 100) { 
+                    // Nén vector về lại bán kính an toàn nhưng vẫn giữ nguyên Góc Pha (Phase)
+                    Z.r = (Z.r / mag) * Math.PI;
+                    Z.i = (Z.i / mag) * Math.PI;
+                }
+                
                 if (i % 25 === 0) {
                     pushLog(`Wavepacket ${i}: Ψ = [${Z.r.toFixed(4)} + ${Z.i.toFixed(4)}i]`, "qnt");
-                    await sleep(100);
+                    await sleep(50);
                 }
             }
 
