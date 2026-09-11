@@ -3,333 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-OMEGA: QUANTUM CHAOS 2.0</title>
+    <title>V-OMEGA 3.0: QUANTUM SUPREMACY</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background-color: #000;
+            background-color: #030712;
             color: #00ffcc;
-            font-family: 'Fira Code', monospace;
+            font-family: 'JetBrains Mono', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
             overflow: hidden;
-            background: radial-gradient(circle at center, #0a1424 0%, #000000 100%);
+            background: radial-gradient(circle at center, #061022 0%, #000000 100%);
         }
 
-        /* Lưới không gian 3D giả lập */
-        .grid-bg {
+        /* Lưới lượng tử & Phương trình chìm */
+        .quantum-grid {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 255, 204, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 204, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: perspective(600px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 15s linear infinite;
+                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(800px) rotateX(70deg) translateY(-100px) translateZ(-200px);
+            animation: warpDrive 20s linear infinite;
             z-index: 0;
         }
 
-        @keyframes gridMove {
-            0% { transform: perspective(600px) rotateX(60deg) translateY(0) translateZ(-200px); }
-            100% { transform: perspective(600px) rotateX(60deg) translateY(40px) translateZ(-200px); }
+        .math-bg {
+            position: absolute;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.03);
+            white-space: pre-wrap;
+            z-index: 1;
+            pointer-events: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        @keyframes warpDrive {
+            0% { transform: perspective(800px) rotateX(70deg) translateY(0) translateZ(-200px); }
+            100% { transform: perspective(800px) rotateX(70deg) translateY(50px) translateZ(-200px); }
         }
 
         .container {
             position: relative;
             z-index: 10;
-            background: rgba(4, 13, 33, 0.85);
-            padding: 35px;
-            border-radius: 6px;
-            box-shadow: 0 0 50px rgba(0, 255, 204, 0.15), inset 0 0 20px rgba(0, 255, 204, 0.05);
+            background: rgba(5, 10, 20, 0.85);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 60px rgba(0, 255, 204, 0.1), inset 0 0 30px rgba(0, 255, 204, 0.1);
             width: 100%;
-            max-width: 700px;
-            border: 1px solid rgba(0, 255, 204, 0.4);
-            backdrop-filter: blur(12px);
+            max-width: 750px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            backdrop-filter: blur(15px);
         }
 
         h1 {
             color: #fff;
-            font-size: 32px;
+            font-size: 36px;
             text-align: center;
-            margin-bottom: 10px;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+            margin-bottom: 5px;
+            letter-spacing: 6px;
+            text-shadow: 0 0 10px #00ffcc, 0 0 30px #00b3ff;
+            font-weight: 800;
         }
 
         .subtitle {
             text-align: center;
             font-size: 12px;
-            color: #f50057;
-            margin-bottom: 30px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            animation: pulse 1.5s infinite;
+            color: #ff0055;
+            margin-bottom: 35px;
+            letter-spacing: 4px;
+            font-weight: bold;
+            animation: pulse-danger 1s infinite;
         }
 
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes pulse-danger { 0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff0055; } 50% { opacity: 0.5; text-shadow: none;} }
 
         input {
             width: 100%;
-            padding: 18px;
-            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
             border: 1px solid #00ffcc;
             color: #fff;
-            font-size: 18px;
-            font-family: 'Fira Code', monospace;
+            font-size: 20px;
+            font-family: 'JetBrains Mono', monospace;
             text-align: center;
             outline: none;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            transition: 0.3s;
+            letter-spacing: 4px;
+            border-radius: 4px;
+            transition: all 0.3s;
         }
         
         input:focus {
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
-            border-color: #fff;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+            border-color: #00b3ff;
         }
 
         button {
             width: 100%;
-            padding: 16px;
-            margin-top: 20px;
-            background: linear-gradient(90deg, #00ffcc, #00b3ff);
-            color: #000;
+            padding: 18px;
+            margin-top: 25px;
+            background: linear-gradient(135deg, #00ffcc, #0055ff);
+            color: #fff;
             border: none;
-            font-size: 20px;
-            font-family: 'Fira Code', monospace;
-            font-weight: bold;
+            font-size: 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0, 179, 255, 0.4);
         }
 
         button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 35px rgba(0, 255, 204, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(0, 255, 204, 0.8);
         }
 
-        /* Màn hình phân tích cực gắt */
+        /* Terminal Console */
         .analyzer-screen {
             display: none;
-            margin-top: 25px;
-            background: #02060f;
-            border: 1px solid #333;
-            padding: 15px;
-            height: 250px;
+            margin-top: 30px;
+            background: #010409;
+            border: 1px solid #1f3a52;
+            padding: 20px;
+            height: 300px;
             overflow-y: hidden;
             position: relative;
-            box-shadow: inset 0 0 15px rgba(0,0,0,1);
+            border-radius: 4px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,1);
         }
 
         .code-lines {
-            font-size: 12px;
+            font-size: 13px;
             color: #00ffcc;
-            line-height: 1.5;
-            opacity: 0.9;
+            line-height: 1.6;
         }
 
-        .math-equation { color: #ffeb3b; }
-        .danger-txt { color: #f50057; font-weight: bold;}
-        .highlight-txt { color: #00b3ff; }
+        .log-math { color: #ffeb3b; }
+        .log-sys { color: #00b3ff; }
+        .log-err { color: #ff0055; font-weight: bold; }
+        .log-qnt { color: #b388ff; font-style: italic; }
 
-        /* Kết quả hiển thị Glitch */
+        /* Khối hiển thị kết quả */
         .final-box {
             display: none;
-            margin-top: 25px;
+            margin-top: 30px;
             text-align: center;
-            padding: 30px 10px;
-            background: rgba(0,0,0,0.8);
-            border-top: 2px solid #00ffcc;
-            border-bottom: 2px solid #00ffcc;
+            padding: 35px 15px;
+            background: rgba(0,0,0,0.9);
+            border-top: 3px solid #00ffcc;
+            border-bottom: 3px solid #ff0055;
             position: relative;
         }
 
         .result-main {
-            font-size: 75px;
-            font-weight: bold;
-            letter-spacing: 12px;
+            font-size: 85px;
+            font-weight: 800;
+            letter-spacing: 15px;
             margin-bottom: 5px;
         }
 
         .result-sub {
-            font-size: 30px;
-            letter-spacing: 6px;
+            font-size: 35px;
+            letter-spacing: 8px;
+            font-weight: 700;
         }
 
-        .glitch-tai { color: #00ffcc; text-shadow: 3px 3px 0px #f50057, -3px -3px 0px #00b3ff; }
-        .glitch-xiu { color: #f50057; text-shadow: 3px 3px 0px #00ffcc, -3px -3px 0px #ffeb3b; }
-        
-        .glitch-chan { color: #ffeb3b; }
-        .glitch-le { color: #b388ff; }
+        .glitch-tai { color: #00ffcc; text-shadow: 4px 4px 0px #0055ff, -4px -4px 0px #ffeb3b; }
+        .glitch-xiu { color: #ff0055; text-shadow: 4px 4px 0px #ffeb3b, -4px -4px 0px #00b3ff; }
+        .glitch-chan { color: #ffeb3b; text-shadow: 2px 2px 0px #000; }
+        .glitch-le { color: #b388ff; text-shadow: 2px 2px 0px #000; }
 
-        .shake { animation: shake 0.4s infinite; }
-        @keyframes shake {
-            0% { transform: translate(2px, 1px) rotate(0deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            40% { transform: translate(1px, -2px) rotate(1deg); }
-            60% { transform: translate(-3px, 2px) rotate(0deg); }
-            80% { transform: translate(-1px, -2px) rotate(2deg); }
-            100% { transform: translate(2px, -1px) rotate(-1deg); }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: rgba(0, 255, 204, 0.5);
+            opacity: 0.6;
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
         }
 
         .stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: #666;
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 12px;
+            color: #888;
+            margin-top: 25px;
             font-weight: bold;
+            text-align: left;
+            border-top: 1px dashed #333;
+            padding-top: 15px;
         }
+        .stats span { color: #00ffcc; float: right; }
     </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
+    <div class="quantum-grid"></div>
+    <div class="math-bg">
+        ∂Ψ/∂t = iℏ∇²Ψ - V(x)Ψ<br><br>
+        e^(iπ) + 1 = 0<br><br>
+        ∇ × B = μ₀J + μ₀ε₀(∂E/∂t)<br><br>
+        Z_{n+1} = sin(Z_n²) + C
+    </div>
 
     <div class="container">
-        <h1>V-OMEGA CORE 2.0</h1>
-        <div class="subtitle">WARNING: HÉNON STRANGE ATTRACTOR ACTIVE</div>
+        <h1>V-OMEGA 3.0</h1>
+        <div class="subtitle">SCHRÖDINGER WAVE COLLAPSE ALGORITHM</div>
         
-        <input type="text" id="md5Input" placeholder="INPUT 32-BIT MD5 HASH" maxlength="32">
-        <button onclick="executeOmega()" id="btnExecute">EXECUTE QUANTUM MATH</button>
+        <input type="text" id="md5Input" placeholder="INPUT 32-BIT HASH SEQUENCE" maxlength="32">
+        <button onclick="executeQuantum()" id="btnExecute">INITIALIZE TENSOR MATRIX</button>
 
         <div class="analyzer-screen" id="analyzerScreen">
             <div id="codeConsole" class="code-lines"></div>
         </div>
 
         <div class="final-box" id="resultBox">
+            <div class="scanline"></div>
             <div id="resTaiXiu" class="result-main"></div>
             <div id="resChanLe" class="result-sub"></div>
             
             <div class="stats">
-                <span id="entropyStat">MAGNITUDE: 0.0000</span>
-                <span id="chaosStat">PARITY: 0x00</span>
+                <div>PHASE ANGLE (θ): <span id="statTheta">0.000 rad</span></div>
+                <div>EIGENVALUE (λ): <span id="statLambda">0.000</span></div>
+                <div>TENSOR DET |ρ|: <span id="statDet">0.000</span></div>
+                <div>DECOHERENCE T: <span id="statTime">0.00 ms</span></div>
             </div>
         </div>
     </div>
 
     <script>
-        async function sha256(message) {
+        // LỚP TOÁN HỌC SỐ PHỨC (COMPLEX NUMBERS)
+        class Complex {
+            constructor(r, i) { this.r = r; this.i = i; }
+            add(c) { return new Complex(this.r + c.r, this.i + c.i); }
+            mul(c) { return new Complex(this.r * c.r - this.i * c.i, this.r * c.i + this.i * c.r); }
+            // Hàm Complex Sine: sin(x+iy) = sin(x)cosh(y) + i*cos(x)sinh(y)
+            sin() {
+                return new Complex(
+                    Math.sin(this.r) * Math.cosh(this.i),
+                    Math.cos(this.r) * Math.sinh(this.i)
+                );
+            }
+            mag() { return Math.sqrt(this.r * this.r + this.i * this.i); }
+            angle() { return Math.atan2(this.i, this.r); } // Trả về [-π, π]
+        }
+
+        async function sha512(message) {
             const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashBuffer = await crypto.subtle.digest('SHA-512', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        function pushLog(text, type = "normal") {
+        function pushLog(text, type = "sys") {
             const cons = document.getElementById('codeConsole');
-            let className = "";
-            if (type === "math") className = "math-equation";
-            if (type === "danger") className = "danger-txt";
-            if (type === "highlight") className = "highlight-txt";
-            
+            let className = `log-${type}`;
             cons.innerHTML += `<div class="${className}">[${(new Date()).toISOString().substring(11,23)}] ${text}</div>`;
             cons.scrollTop = cons.scrollHeight;
         }
 
         const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-        async function executeOmega() {
+        async function executeQuantum() {
             const inputVal = document.getElementById('md5Input').value.trim().toLowerCase();
             if (!/^[a-f0-9]{32}$/.test(inputVal)) {
-                alert("CRITICAL ERROR: Dữ liệu không hợp lệ. Vui lòng nhập đúng 32 ký tự MD5.");
+                alert("CRITICAL ERROR: HỆ THỐNG YÊU CẦU CHUỖI MD5 32 KÝ TỰ.");
                 return;
             }
+
+            const startTime = performance.now();
 
             // Reset UI
             document.getElementById('btnExecute').style.display = 'none';
             document.getElementById('resultBox').style.display = 'none';
             document.getElementById('analyzerScreen').style.display = 'block';
-            const cons = document.getElementById('codeConsole');
-            cons.innerHTML = "";
+            document.getElementById('codeConsole').innerHTML = "";
 
-            // BƯỚC 1: BĂM KÉP SHA-256
-            pushLog("INITIATING QUANTUM HASHING...", "highlight");
-            await sleep(300);
-            const shaHash = await sha256(inputVal);
-            pushLog(`SHA-256 GENERATED: ${shaHash.substring(0, 24)}...`);
-            await sleep(300);
-            
-            // BƯỚC 2: XOR-FOLDING (Chia khối và gập dữ liệu)
-            pushLog("PERFORMING BITWISE XOR-FOLDING MATRIX...", "math");
-            let chunks = [];
-            for (let i = 0; i < 8; i++) {
-                chunks.push(parseInt(shaHash.substring(i * 8, i * 8 + 8), 16));
+            // BƯỚC 1: HÀM TRỄ VDF (MÔ PHỎNG ĐA CHIỀU)
+            pushLog("ENGAGING VERIFIABLE DELAY FUNCTION (VDF)...", "sys");
+            let hash = inputVal;
+            for(let i = 0; i < 5; i++) {
+                hash = await sha512(hash);
+                if(i===0) pushLog(`SHA-512 EXPANSION: ${hash.substring(0, 40)}...`, "sys");
             }
-            
-            // Tạo Hạt giống Lõi (Core Seeds) từ việc XOR các khối đối xứng
-            let alpha = chunks[0] ^ chunks[4];
-            let beta = chunks[1] ^ chunks[5];
-            let gamma = chunks[2] ^ chunks[6];
-            let delta = chunks[3] ^ chunks[7];
-            
-            pushLog(`CORE SEEDS: α=${alpha.toString(16)} | β=${beta.toString(16)}`);
+            await sleep(300);
+
+            // BƯỚC 2: TÍNH TOÁN MA TRẬN TENSOR 4x4
+            pushLog("CONSTRUCTING 4x4 DENSITY MATRIX ρ...", "qnt");
+            let m = [];
+            for(let i=0; i<16; i++) {
+                m.push(parseInt(hash.substring(i*4, i*4+4), 16) / 65535);
+            }
+            // Định thức xấp xỉ ma trận 4x4 từ đường chéo và các vết (Trace)
+            let tensorDet = (m[0]*m[5]*m[10]*m[15]) - (m[3]*m[6]*m[9]*m[12]);
+            pushLog(`TENSOR DET |ρ| = ${tensorDet.toFixed(8)}`, "math");
             await sleep(400);
 
-            // BƯỚC 3: HỆ HÉNON (HÉNON MAP STRANGE ATTRACTOR - 2D CHAOS)
-            pushLog("INJECTING HÉNON STRANGE ATTRACTOR...", "danger");
+            // BƯỚC 3: TIẾN HÓA SÓNG TRONG KHÔNG GIAN PHỨC (FRACTAL SINE)
+            pushLog("APPLYING HAMILTONIAN OPERATOR ĤΨ = EΨ...", "err");
             
-            // Tham số hỗn loạn chuẩn (a ≈ 1.4, b ≈ 0.3) cộng thêm nhiễu từ Hash
-            let a = 1.4 + ((alpha % 10000) / 100000); 
-            let b = 0.3 + ((beta % 10000) / 100000); 
-            
-            // Điểm khởi tạo x, y
-            let x = (gamma % 10000) / 10000; 
-            let y = (delta % 10000) / 10000; 
+            // Lấy hạt giống từ 64 ký tự cuối của chuỗi SHA-512
+            let realSeed = parseInt(hash.substring(64, 80), 16) / 1e19;
+            let imagSeed = parseInt(hash.substring(80, 96), 16) / 1e19;
 
-            pushLog(`ƒ(Xn+1) = 1 - ${a.toFixed(4)}Xn² + Yn`, "math");
-            pushLog(`ƒ(Yn+1) = ${b.toFixed(4)}Xn`, "math");
-            await sleep(400);
-            
-            // Chạy vòng lặp hỗn loạn 100 lần
-            for(let i=1; i<=100; i++) {
-                let next_x = 1 - a * x * x + y;
-                let next_y = b * x;
-                x = next_x;
-                y = next_y;
+            // Chuyển đổi thành số phức C trong giới hạn an toàn [-2, 2]
+            let c_real = -2.0 + (realSeed * 4.0);
+            let c_imag = -2.0 + (imagSeed * 4.0);
+            let C = new Complex(c_real, c_imag);
+            let Z = new Complex(0, 0);
+
+            pushLog(`ƒ(Z_{n+1}) = sin(Z_n²) + (${c_real.toFixed(4)} + ${c_imag.toFixed(4)}i)`, "math");
+            await sleep(500);
+
+            // Chạy 100 vòng lặp lượng tử
+            for(let i = 1; i <= 100; i++) {
+                let Z_squared = Z.mul(Z); // Z^2
+                let Z_sin = Z_squared.sin(); // sin(Z^2)
+                Z = Z_sin.add(C); // sin(Z^2) + C
                 
                 if (i % 25 === 0) {
-                    pushLog(`Vector ${i}: [ ${x.toFixed(6)}, ${y.toFixed(6)} ]`);
+                    pushLog(`Wavepacket ${i}: Ψ = [${Z.r.toFixed(4)} + ${Z.i.toFixed(4)}i]`, "qnt");
                     await sleep(100);
                 }
             }
 
-            // BƯỚC 4: RÚT TRÍCH ENTROPY VÀ SỤP ĐỔ HÀM SÓNG (WAVE FUNCTION COLLAPSE)
-            pushLog("ANALYZING WAVE AMPLITUDE & PARITY...", "highlight");
+            // BƯỚC 4: SỤP ĐỔ HÀM SÓNG (MEASUREMENT)
+            pushLog("MEASURING HILBERT SPACE OBSERVABLES...", "sys");
             await sleep(400);
+            pushLog("COLLAPSING SUPERPOSITION...", "err");
+            await sleep(600);
 
-            // Logic Tài/Xỉu: Dựa vào Biên độ (Magnitude) tuyệt đối của X
-            // Sau 100 vòng lặp, lấy phần thập phân của |X| để đánh giá năng lượng
-            let magnitude = Math.abs(x);
-            let fractionalEnergy = magnitude - Math.floor(magnitude); 
-            pushLog(`MAGNITUDE = ${fractionalEnergy.toFixed(6)} (Threshold: 0.500000)`, "math");
+            // Lấy Góc Pha (Phase Angle) để định đoạt Tài Xỉu
+            let theta = Z.angle(); // Từ -π đến π
 
-            // Logic Chẵn/Lẻ: Dựa vào Tính chẵn lẻ (Parity) của giá trị tọa độ không gian gộp
-            // Nhân Y với một hằng số lớn, lấy phần nguyên và kiểm tra bit cuối (Chẵn hay Lẻ)
-            let spatialEntropy = Math.floor(Math.abs(y * 10000000));
-            pushLog(`SPATIAL ENTROPY = ${spatialEntropy} => PARITY CHECK`, "math");
-            
-            await sleep(500);
-            pushLog("COLLAPSING SUPERPOSITION...", "danger");
-            await sleep(500);
+            // Lấy Trị Riêng (Eigenvalue) để định đoạt Chẵn Lẻ
+            let lambda = Z.mag();
+            let parityCheck = Math.floor(lambda * 1000000); 
 
-            // HIỂN THỊ KẾT QUẢ
+            // HIỂN THỊ UI
             document.getElementById('analyzerScreen').style.display = 'none';
             document.getElementById('resultBox').style.display = 'block';
-            
-            // Hiệu ứng rung gắt
-            document.getElementById('resultBox').classList.add('shake');
-            setTimeout(() => document.getElementById('resultBox').classList.remove('shake'), 600);
 
-            // Định đoạt Tài / Xỉu
+            // TÀI / XỈU (Dựa vào pha không gian: Pha Dương = Tài, Pha Âm = Xỉu)
             const txNode = document.getElementById('resTaiXiu');
-            if (fractionalEnergy > 0.5) {
+            if (theta > 0) {
                 txNode.textContent = "TÀI";
                 txNode.className = "result-main glitch-tai";
             } else {
@@ -337,9 +370,9 @@
                 txNode.className = "result-main glitch-xiu";
             }
 
-            // Định đoạt Chẵn / Lẻ
+            // CHẴN / LẺ (Dựa vào Modulo của Trị riêng)
             const clNode = document.getElementById('resChanLe');
-            if (spatialEntropy % 2 === 0) {
+            if (parityCheck % 2 === 0) {
                 clNode.textContent = "{ CHẴN }";
                 clNode.className = "result-sub glitch-chan";
             } else {
@@ -347,13 +380,17 @@
                 clNode.className = "result-sub glitch-le";
             }
 
-            // Cập nhật thông số kỹ thuật (Decor)
-            document.getElementById('entropyStat').textContent = `MAGNITUDE: ${fractionalEnergy.toFixed(5)}`;
-            document.getElementById('chaosStat').textContent = `PARITY: 0x${spatialEntropy.toString(16).toUpperCase()}`;
+            const endTime = performance.now();
 
-            // Reset Nút
+            // Cập nhật chỉ số Stats
+            document.getElementById('statTheta').textContent = `${theta.toFixed(6)} rad`;
+            document.getElementById('statLambda').textContent = `${lambda.toFixed(6)}`;
+            document.getElementById('statDet').textContent = `${tensorDet.toExponential(4)}`;
+            document.getElementById('statTime').textContent = `${(endTime - startTime).toFixed(2)} ms`;
+
+            // Trả lại nút bấm
             document.getElementById('btnExecute').style.display = 'block';
-            document.getElementById('btnExecute').textContent = "DECODE NEW HASH";
+            document.getElementById('btnExecute').textContent = "CALCULATE NEXT TENSOR";
         }
     </script>
 </body>
